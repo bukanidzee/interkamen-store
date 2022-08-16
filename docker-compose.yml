@@ -24,7 +24,10 @@ services:
           - EMAIL_HOST_USER=$EMAIL_HOST_USER
           - EMAIL_HOST_PASSWORD=$EMAIL_HOST_PASSWORD
           - DEFAULT_FROM_EMAIL=$DEFAULT_FROM_EMAIL
-          - DATABASE_URL=$DATABASE_URL
+          - DATABASE_NAME=$DATABASE_NAME
+          - DATABASE_USER=$DATABASE_USER
+          - DATABASE_PASSWORD=$DATABASE_PASSWORD
+          - DATABASE_NAME=$DATABASE_HOST
           - SENTRY_DSN=$SENTRY_DSN
           - SENTRY_TRACES_SAMPLE_RATE=$SENTRY_TRACES_SAMPLE_RATE
         build:
@@ -32,9 +35,18 @@ services:
             dockerfile: ./docker/api/Dockerfile
         volumes:
             - "static_volume:/app/django_static"
-
+        depends_on:
+            - db
         expose:
             - 8000
+    db:
+      image: postgres
+      ports:
+        - "5432"
+      environment:
+        - POSTGRES_DB=$DATABASE_NAME
+        - POSTGRES_USER=$DATABASE_USER
+        - POSTGRES_PASSWORD=$DATABASE_PASSWORD
 
 volumes:
     static_volume: {}
