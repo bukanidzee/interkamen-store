@@ -1,0 +1,9 @@
+.spisok {
+  list-style: none;
+  counter-reset: li;
+}
+
+.element:before {
+  counter-increment: li;
+  content: counters(li,".") ". ";
+}

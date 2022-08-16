@@ -1,0 +1,35 @@
+.pagination-bar {
+  margin-top: 30px;
+  display: flex;
+  align-content: center;
+  justify-content: space-between;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.numbers-wrapper {
+  display: flex;
+  align-content: center;
+}
+
+.number {
+  border: none;
+  background-color: inherit;
+  outline: none;
+  padding-right: 5px;
+}
+
+.number:active:hover {
+  animation: changePresense 0.5s ease-out ;
+}
+
+@keyframes changePresense {
+    0%,
+    100% {background-color: rgba(65, 105, 225, 0.5)}
+}
+
+.active_number{
+  text-decoration: underline;
+  color: blue;
+  text-decoration-color: blue;
+}

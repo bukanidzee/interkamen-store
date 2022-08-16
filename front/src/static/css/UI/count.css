@@ -1,0 +1,11 @@
+.count {
+  display: flex;
+  justify-content:space-around;
+  flex-grow: 1;
+  width: 100%;
+  align-items: center;
+}
+
+.count.spaceBetween {
+  justify-content: space-between;
+}

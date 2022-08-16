@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+    nginx:
+        restart: unless-stopped
+        environment:
+          - API_ORIGIN=$API_ORIGIN
+        build:
+            context: .
+            dockerfile: ./docker/nginx/Dockerfile
+        ports:
+            - 80:80
+        volumes:
+            - "./docker/nginx/development:/etc/nginx/conf.d"
+            - "static_volume:/app/django_static"
+
+        depends_on:
+            - api
+    api:
+        restart: unless-stopped
+        environment:
+          - SECRET_KEY=$SECRET_KEY
+          - DEBUG=$DEBUG
+          - EMAIL_HOST_USER=$EMAIL_HOST_USER
+          - EMAIL_HOST_PASSWORD=$EMAIL_HOST_PASSWORD
+          - DEFAULT_FROM_EMAIL=$DEFAULT_FROM_EMAIL
+          - DATABASE_URL=$DATABASE_URL
+          - SENTRY_DSN=$SENTRY_DSN
+          - SENTRY_TRACES_SAMPLE_RATE=$SENTRY_TRACES_SAMPLE_RATE
+        build:
+            context: .
+            dockerfile: ./docker/api/Dockerfile
+        volumes:
+            - "static_volume:/app/django_static"
+
+        expose:
+            - 8000
+
+volumes:
+    static_volume: {}
+
+# - "static_volume:/app/django_static"
+#             - "./api:/app/"
+#             - "./front:/app/"

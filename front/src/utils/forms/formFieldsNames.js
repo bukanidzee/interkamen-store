@@ -1,0 +1,13 @@
+export const names = {'username': 'логин',
+                      'password1': 'пароль',
+                      'password': 'пароль',
+                      'email': 'email',
+                      'first_name': 'имя',
+                      'last_name': 'фамилию',
+                      'third_name': 'отчество',
+                      'old_password': 'старый пароль',
+                      'new_password1': 'новый пароль',
+                      'title': 'название продукта',
+                      'prize': 'цена продукта',
+                      'description': 'описание продукта',
+                      'image': 'изображение продукта'}

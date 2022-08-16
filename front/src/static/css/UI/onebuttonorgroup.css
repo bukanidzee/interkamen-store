@@ -1,0 +1,11 @@
+.one-button {
+  display: flex;
+  justify-content: flex-end;
+  flex: 1 0;
+}
+
+.group-of-buttons {
+  display: flex;
+  justify-content: space-between;
+  flex: 1 0;
+}

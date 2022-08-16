@@ -1,0 +1,30 @@
+[[source]]
+url = "https://pypi.org/simple"
+verify_ssl = true
+name = "pypi"
+
+[packages]
+django-extensions = "*"
+djangorestframework = "*"
+django-choices = "*"
+django = "==3.2"
+pillow = "*"
+gunicorn = "*"
+pytest-django = "*"
+factory-boy = "*"
+model-bakery = "*"
+django-rest-auth = "*"
+django-allauth = "*"
+pytest-mock = "*"
+requests-mock = "*"
+django-mock-queries = "*"
+django-cors-headers = "*"
+django-lifecycle = "*"
+django-environ = "*"
+psycopg2 = "*"
+sentry-sdk = "*"
+
+[dev-packages]
+
+[requires]
+python_version = "3.7"

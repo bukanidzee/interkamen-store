@@ -1,0 +1,31 @@
+table{
+  border: 2px solid black;
+  border-collapse: collapse;
+}
+th{
+  text-align: center;
+  border: 2px solid black;
+}
+
+tr:hover td{
+  background: blue;
+}
+
+tr:nth-child(2n){
+  background: #e8edff;
+}
+
+td{
+  text-align: center;
+  border: 2px solid grey;
+  padding: 20px;
+}
+caption{
+  text-align: right;
+  caption-side: top;
+}
+.conclusion{
+  background-color: gray;
+  color: white;
+  text-align: right;
+}

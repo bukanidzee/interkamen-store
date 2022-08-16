@@ -1,0 +1,12 @@
+#api
+api/.pytest_cache
+api/django_static
+api/tests
+api/.env
+api/pytest.ini
+api/*/migrations/*
+!api/*/migrations/__init__.py
+#front
+front/node_modules
+front/django_static
+front/build

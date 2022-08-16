@@ -1,0 +1,16 @@
+.aside {
+  background: #f8f9fa;
+  position: relative;
+  top: calc(40vh - 100px);
+  padding: 10px;
+  width: 250px;
+  opacity: 0.9;
+  border-width: 0px;
+  border-radius: 3px;
+  border-color: #B6B6B6;
+  border-style: solid;
+  z-index: 0;
+}
+.menu {
+  margin-left: 15px;
+}
