@@ -122,7 +122,7 @@ WSGI_APPLICATION = 'store.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
-DATABASE_URL = env.db(default=False)
+DATABASE_URL = env.db(default='')
 
 if DATABASE_URL:
     DATABASES = {
@@ -140,8 +140,6 @@ else:
             'PORT': '5432'   # default postgres port
         }
     }
-
-print(DATABASES)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
