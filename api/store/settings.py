@@ -50,7 +50,7 @@ SECRET_KEY = env.str('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG')
 
-ALLOWED_HOSTS = ['.herokuapp.com', 'localhost',
+ALLOWED_HOSTS = ['my-training-react-project.herokuapp.com', 'localhost',
                  '127.0.0.1', '0.0.0.0', '[::1]']
 
 
@@ -122,20 +122,26 @@ WSGI_APPLICATION = 'store.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+DATABASE_URL = env.db(default=False)
 
-
-DATABASES = {
-    # 'default': env.db(),
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env.str('DATABASE_NAME'),
-        'USER': env.str('DATABASE_USER'),
-        'PASSWORD': env.str('DATABASE_PASSWORD'),
-        # set in docker-compose.yml
-        'HOST': env.str('DATABASE_HOST', default='db'),
-        'PORT': '5432'   # default postgres port
+if DATABASE_URL:
+    DATABASES = {
+        'default': DATABASE_URL,
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': env.str('DATABASE_NAME'),
+            'USER': env.str('DATABASE_USER'),
+            'PASSWORD': env.str('DATABASE_PASSWORD'),
+            # set in docker-compose.yml
+            'HOST': env.str('DATABASE_HOST', default='db'),
+            'PORT': '5432'   # default postgres port
+        }
+    }
+
+print(DATABASES)
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
