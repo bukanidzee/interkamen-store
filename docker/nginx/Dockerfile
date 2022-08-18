@@ -5,8 +5,16 @@ FROM node:16.13.1-alpine as build
 WORKDIR /app/
 COPY ./front/package.json /app/
 COPY ./front/package-lock.json /app/
-RUN npm ci --silent
+
+RUN npm install
+
+ARG REACT_APP_API_ORIGIN
+
+ENV REACT_APP_API_ORIGIN=$REACT_APP_API_ORIGIN
+
+# RUN npm ci --silent
 COPY ./front/ /app/
+
 RUN npm run build
 
 # The second stage

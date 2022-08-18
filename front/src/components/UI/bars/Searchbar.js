@@ -8,7 +8,7 @@ const SearchBar = ({changeSearchQuery}) => {
   const returnInputValue = useCallback((e) => {
     e.preventDefault()
     changeSearchQuery(inputValue);
-  }, [changeSearchQuery])
+  }, [changeSearchQuery, inputValue])
 
   return(
     <form className='search-bar' onSubmit={returnInputValue}>

@@ -1,12 +1,14 @@
 #overall
 .git
 .env
+not_needed
 #api
 api/.pytest_cache
 api/django_static
 api/tests
 api/pytest.ini
 api/media
+api/*.json
 api/*/migrations/*
 !api/*/migrations/__init__.py
 #front

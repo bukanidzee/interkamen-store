@@ -3,11 +3,11 @@ version: '3.8'
 services:
     nginx:
         restart: unless-stopped
-        environment:
-          - API_ORIGIN=$API_ORIGIN
         build:
             context: .
             dockerfile: ./docker/nginx/Dockerfile
+            args:
+                REACT_APP_API_ORIGIN: ${REACT_APP_API_ORIGIN}
         ports:
             - 80:80
         volumes:
@@ -27,12 +27,17 @@ services:
           - DATABASE_NAME=$DATABASE_NAME
           - DATABASE_USER=$DATABASE_USER
           - DATABASE_PASSWORD=$DATABASE_PASSWORD
-          - DATABASE_NAME=$DATABASE_HOST
           - SENTRY_DSN=$SENTRY_DSN
           - SENTRY_TRACES_SAMPLE_RATE=$SENTRY_TRACES_SAMPLE_RATE
+          - USE_S3=$USE_S3
+          - AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+          - AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+          - AWS_STORAGE_BUCKET_NAME=$AWS_STORAGE_BUCKET_NAME
         build:
             context: .
             dockerfile: ./docker/api/Dockerfile
+        # ports:
+        #     - 8000:8000
         volumes:
             - "static_volume:/app/django_static"
         depends_on:
@@ -40,9 +45,12 @@ services:
         expose:
             - 8000
     db:
-      image: postgres
+      restart: always
+      image: postgres:latest
+      volumes:
+        - postgres_volume:/var/lib/postgresql/data/
       ports:
-        - "5432"
+        - 5432:5432
       environment:
         - POSTGRES_DB=$DATABASE_NAME
         - POSTGRES_USER=$DATABASE_USER
@@ -50,6 +58,7 @@ services:
 
 volumes:
     static_volume: {}
+    postgres_volume:
 
 # - "static_volume:/app/django_static"
 #             - "./api:/app/"
