@@ -7,8 +7,8 @@ setup:
     # S3_BUCKET: my-example-bucket
 build:
   docker:
-    nginx: ./docker/nginx/Dockerfile
-    api: ./docker/api/Dockerfile
+    nginx: ./heroku_config/nginx/Dockerfile
+    api: ./heroku_config/api/Dockerfile
   config:
     REACT_APP_API_ORIGIN: ${REACT_APP_API_ORIGIN}
 # release:
