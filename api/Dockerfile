@@ -9,16 +9,19 @@ ENV PYTHONUNBUFFERED=1
 
 # Установка корневой папки
 
-RUN mkdir -p /app
+#RUN mkdir -p /app
+WORKDIR /app/
 
-RUN cp -a /api/Pipfile /app && cp -a /api/Pipfile.lock /app
+#RUN cp -a Pipfile /app && cp -a /api/Pipfile.lock /app
+COPY Pipfile* ./
 
 # Установка зависимостей
 RUN pip install pipenv && pipenv install --system && rm -Rf /root/.cache/pip/
 
 # Скопировать проект
-COPY wsgi-entrypoint.sh /entry/wsgi-entrypoint.sh
-RUN cp -a /api/. /app
+COPY heroku/wsgi-entrypoint.sh /entry/wsgi-entrypoint.sh
+#RUN cp -a /api/. /app
+COPY . .
 
 RUN chmod +x /entry/wsgi-entrypoint.sh
 
