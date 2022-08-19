@@ -2,7 +2,7 @@
 # Build React static files
 FROM node:16.13.1-alpine as build
 
-RUN ls
+RUN ls -l
 WORKDIR /app/
 
 COPY /front/package.json ./

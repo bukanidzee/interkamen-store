@@ -8,7 +8,7 @@ ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 
 # Установка корневой папки
-RUN ls 
+RUN ls -l
 WORKDIR /app/
 
 COPY /api/Pipfile ./
