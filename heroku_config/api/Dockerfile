@@ -9,6 +9,7 @@ ENV PYTHONUNBUFFERED=1
 
 # Установка корневой папки
 WORKDIR /app/
+RUN ls -l
 COPY /api/Pipfile ./
 COPY /api/Pipfile.lock ./
 

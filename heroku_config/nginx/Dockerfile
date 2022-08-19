@@ -3,6 +3,7 @@
 FROM node:16.13.1-alpine as build
 
 WORKDIR /app/
+RUN ls -l
 COPY /front/package.json ./
 COPY /front/package-lock.json ./
 
