@@ -3,10 +3,10 @@
 FROM node:16.13.1-alpine as build
 
 RUN ls -l
-WORKDIR /app
+RUN mkdir -p /app
 
-COPY ../front/package.json ./
-COPY ../front/package-lock.json ./
+COPY ./front/package.json /app
+COPY ./front/package-lock.json /app
 
 RUN npm install
 
@@ -15,7 +15,7 @@ ARG REACT_APP_API_ORIGIN
 ENV REACT_APP_API_ORIGIN=$REACT_APP_API_ORIGIN
 
 # RUN npm ci --silent
-COPY ../front ./
+COPY ./front /app
 
 RUN npm run build
 
