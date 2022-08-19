@@ -7,8 +7,7 @@ RUN mkdir -p /app
 RUN ls -l && cd .. && ls -l
 
 
-RUN cp -a /front/package.json /app &&
-    cp -a /front/package-lock.json /app
+RUN cp -a /front/package.json /app && cp -a /front/package-lock.json /app
 
 RUN npm install
 

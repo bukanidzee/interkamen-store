@@ -11,8 +11,7 @@ ENV PYTHONUNBUFFERED=1
 
 RUN mkdir -p /app
 
-RUN cp -a /api/Pipfile /app &&
-    cp -a /api/Pipfile.lock /app
+RUN cp -a /api/Pipfile /app && cp -a /api/Pipfile.lock /app
 
 # Установка зависимостей
 RUN pip install pipenv && pipenv install --system && rm -Rf /root/.cache/pip/
