@@ -10,19 +10,16 @@ ENV PYTHONUNBUFFERED=1
 # Установка корневой папки
 
 RUN mkdir -p /app
-RUN ls -l && cd .. && ls -l
 
-COPY ./api/Pipfile /app
-COPY ./api/Pipfile.lock /app
+RUN cp -a /api/Pipfile /app &&
+    cp -a /api/Pipfile.lock /app
 
 # Установка зависимостей
 RUN pip install pipenv && pipenv install --system && rm -Rf /root/.cache/pip/
 
 # Скопировать проект
 COPY wsgi-entrypoint.sh /entry/wsgi-entrypoint.sh
-COPY ./api /app
-
-EXPOSE $PORT
+RUN cp -a /api /app
 
 RUN chmod +x /entry/wsgi-entrypoint.sh
 

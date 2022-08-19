@@ -6,8 +6,9 @@ FROM node:16.13.1-alpine as build
 RUN mkdir -p /app
 RUN ls -l && cd .. && ls -l
 
-COPY ./front/package.json /app
-COPY ./front/package-lock.json /app
+
+RUN cp -a /front/package.json /app &&
+    cp -a /front/package-lock.json /app
 
 RUN npm install
 
@@ -16,7 +17,7 @@ ARG REACT_APP_API_ORIGIN
 ENV REACT_APP_API_ORIGIN=$REACT_APP_API_ORIGIN
 
 # RUN npm ci --silent
-COPY ./front /app
+RUN cp -a /front /app
 
 RUN npm run build
 
