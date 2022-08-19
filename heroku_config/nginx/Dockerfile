@@ -2,8 +2,9 @@
 # Build React static files
 FROM node:16.13.1-alpine as build
 
-RUN ls -l
+
 RUN mkdir -p /app
+RUN ls -l && cd .. && ls -l
 
 COPY ./front/package.json /app
 COPY ./front/package-lock.json /app
