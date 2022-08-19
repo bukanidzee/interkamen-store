@@ -19,7 +19,7 @@ RUN pip install pipenv && pipenv install --system && rm -Rf /root/.cache/pip/
 
 # Скопировать проект
 COPY wsgi-entrypoint.sh /entry/wsgi-entrypoint.sh
-RUN cp -a /api /app
+RUN cp -a /api/. /app
 
 RUN chmod +x /entry/wsgi-entrypoint.sh
 
