@@ -7,7 +7,7 @@ setup:
     # S3_BUCKET: my-example-bucket
 build:
   docker:
-    nginx: ./front/Dockerfile
+    web: ./front/Dockerfile
     api: ./api/Dockerfile
   config:
     REACT_APP_API_ORIGIN: ${REACT_APP_API_ORIGIN}
@@ -15,6 +15,6 @@ build:
 #   command:
 #     - ./deployment-tasks.sh
 #   image: worker
-# run:
-#   : bundle exec puma -C config/puma.rb
-#   worker: python myworker.py
+run:
+  # : bundle exec puma -C config/puma.rb
+  web: nginx -g 'daemon off;'

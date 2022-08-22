@@ -1,8 +1,5 @@
 server {
     listen $PORT default_server;
-    server_name _;
-    server_tokens off;
-    client_max_body_size 20M;
 
     location / {
         root   /usr/share/nginx/html;
