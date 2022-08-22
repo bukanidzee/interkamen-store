@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import {useLocation, useNavigate} from 'react-router-dom';
 import {useSelector} from 'react-redux';
-import 'bootstrap/dist/css/bootstrap.min.css';
+// import 'bootstrap/dist/css/bootstrap.min.css';
 import './static/css/app.css';
 import AppRouter from './components/router/AppRouter';
 import ModalLoader from './components/UI/modal/ModalLoader';

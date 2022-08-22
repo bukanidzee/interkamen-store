@@ -23,7 +23,6 @@ ENV REACT_APP_API_ORIGIN=$REACT_APP_API_ORIGIN
 COPY . .
 
 RUN npm run build
-VOLUME build/static
 
 # The second stage
 # Copy React static files and start nginx
