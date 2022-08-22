@@ -29,4 +29,5 @@ FROM nginx:stable-alpine
 COPY heroku/development/default.conf.template /etc/nginx/conf.d/default.conf.template
 COPY heroku/nginx.conf /etc/nginx/nginx.conf
 COPY --from=build /app/build /usr/share/nginx/html
+#VOLUME app/django_static
 CMD /bin/sh -c "envsubst '\$PORT' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf" && nginx -g 'daemon off;'

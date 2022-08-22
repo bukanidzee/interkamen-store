@@ -23,6 +23,10 @@ COPY heroku/wsgi-entrypoint.sh /entry/wsgi-entrypoint.sh
 #RUN cp -a /api/. /app
 COPY . .
 
+RUN python manage.py collectstatic --noinput
+
+VOLUME /django_static
+
 RUN chmod +x /entry/wsgi-entrypoint.sh
 
 ENTRYPOINT ["/entry/wsgi-entrypoint.sh"]

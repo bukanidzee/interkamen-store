@@ -19,11 +19,9 @@ do
   sleep 2
 done
 
-./manage.py collectstatic --noinput
-
 dos2unix ./store/wsgi.py
 
-gunicorn store.wsgi --bind 0.0.0.0:8000 --workers 4 --threads 4
+gunicorn store.wsgi --bind my-training-react-project.herokuapp.com:8000 --workers 4 --threads 4
 
 #####################################################################################
 # Options to DEBUG Django server
