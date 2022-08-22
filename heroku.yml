@@ -15,6 +15,6 @@ build:
 #   command:
 #     - ./deployment-tasks.sh
 #   image: worker
-run:
-  # : bundle exec puma -C config/puma.rb
-  web: nginx -g 'daemon off;'
+# run:
+#   # : bundle exec puma -C config/puma.rb
+#   web: nginx -g 'daemon off;'
