@@ -27,4 +27,9 @@ server {
         autoindex on;
         alias /app/django_static/;
     }
+
+    location /static/ {
+        autoindex on;
+        alias /app/build/static;
+    }
 }
