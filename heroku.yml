@@ -18,4 +18,4 @@ release:
     - /entry/wsgi-entrypoint.sh
 run:
   # : bundle exec puma -C config/puma.rb
-  worker: gunicorn store.wsgi --log-file - --bind 127.0.0.1:8087
+  worker: cd app && gunicorn store.wsgi --log-file - --bind 127.0.0.1:8087
