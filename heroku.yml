@@ -13,9 +13,9 @@ build:
     REACT_APP_API_ORIGIN: /api/
     NODE_ENV: production
 release:
-  command:
-    - ./entry/wsgi-entrypoint.sh
   image: worker
+  command:
+    - /entry/wsgi-entrypoint.sh
 # run:
 #   # : bundle exec puma -C config/puma.rb
 #   web: nginx -g 'daemon off;'
