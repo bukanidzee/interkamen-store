@@ -16,11 +16,7 @@ RUN npm ci --silent
 
 ARG REACT_APP_API_ORIGIN
 
-ENV REACT_APP_API_ORIGIN=$REACT_APP_API_ORIGIN
-
 ARG NODE_ENV
-
-ENV NODE_ENV=$NODE_ENV
 
 # RUN npm ci --silent
 #RUN cp -a /front/. /app

@@ -1,6 +1,3 @@
 import 'process'
 
-console.log(REACT_APP_API_ORIGIN)
-console.log(process?.env?.REACT_APP_API_ORIGIN)
-
-export const API_ORIGIN = REACT_APP_API_ORIGIN || process?.env?.REACT_APP_API_ORIGIN || 'http://127.0.0.1:8000/api/'
+export const API_ORIGIN = process?.env?.REACT_APP_API_ORIGIN || 'http://127.0.0.1:8000/api/'

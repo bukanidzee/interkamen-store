@@ -33,8 +33,8 @@
     "flow": "flow",
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "start-webpack": "webpack-dev-server --mode development --hot",
-    "build-webpack": "webpack --mode production",
+    "start-webpack": "SET REACT_APP_API_ORIGIN='http://127.0.0.1:8000/api/' && webpack-dev-server --mode development --hot",
+    "build-webpack": "REACT_APP_API_ORIGIN=$REACT_APP_API_ORIGIN webpack --mode $NODE_ENV",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

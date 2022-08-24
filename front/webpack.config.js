@@ -18,12 +18,13 @@ module.exports = {
     new webpack.ProvidePlugin({
       process: 'process/browser',
     }),
-    new webpack.DefinePlugin({
-      REACT_APP_API_ORIGIN: JSON.stringify(process.env.REACT_APP_API_ORIGIN)
-    }),
+    // new webpack.DefinePlugin({
+    //   REACT_APP_API_ORIGIN: JSON.stringify(process.env.REACT_APP_API_ORIGIN)
+    // }),
+    new webpack.EnvironmentPlugin(['REACT_APP_API_ORIGIN']),
     new webpack.SourceMapDevToolPlugin({
       filename: "[file].map"
-  }),
+    }),
   ],
   resolve: {
     extensions: ['.js', '.jsx'],
