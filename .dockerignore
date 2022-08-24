@@ -10,3 +10,4 @@ api/*/migrations/*
 front/node_modules
 front/django_static
 front/build
+front/dist

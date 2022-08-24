@@ -2,11 +2,12 @@ import React from 'react';
 import Button from 'react-bootstrap/Button';
 import {useNavigate} from 'react-router-dom';
 import '../static/css/components/navbar.css';
-import { ReactComponent as BasketIcon } from '../static/images/basket.svg';
+import BasketIcon from '../static/images/basket.svg';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';
+import LogoImg from '../static/images/logo_name.png';
 import {navLinks} from '../navigation/navLinks';
 import {useLogout} from '../hooks/useLogout';
 import {useIsStaffAndFullname} from '../hooks/useAuthData';
@@ -24,7 +25,7 @@ const NavbarComponent = () => {
           <div className='navbar-set'>
             <Navbar.Brand href='/'>
               <img className='head-img'
-                   src={require('../static/images/logo_name.png')}
+                   src={LogoImg}
                    alt='logo'/>
             </Navbar.Brand>
             <Nav variant='pills' className='navbar-set'>

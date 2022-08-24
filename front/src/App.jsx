@@ -4,6 +4,7 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import './static/css/app.css';
+import '../public/favicon.ico'
 import AppRouter from './components/router/AppRouter';
 import ModalLoader from './components/UI/modal/ModalLoader';
 import Errors from './components/UI/errors/Errors';

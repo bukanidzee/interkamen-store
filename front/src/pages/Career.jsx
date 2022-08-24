@@ -1,6 +1,7 @@
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col'
+import FancyPicture from '../static/images/fancy_picture.png'
 
 const Career = () => {
   return (
@@ -18,7 +19,7 @@ const Career = () => {
       </Col>
       <Col sm={4}>
         <img className='in-box-image'
-             src={require('../static/images/fancy_picture.png')}
+             src={FancyPicture}
              alt='fancy_picture'/>
       </Col>
     </Row>
