@@ -28,5 +28,6 @@ VOLUME /django_static
 
 RUN chmod +x /entry/wsgi-entrypoint.sh
 RUN chmod +x /app/manage.py
+RUN chmod +x /app/store/wsgi.py
 
 #CMD ["/entry/wsgi-entrypoint.sh"]

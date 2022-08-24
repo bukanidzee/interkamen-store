@@ -16,6 +16,6 @@ release:
   image: worker
   command:
     - /entry/wsgi-entrypoint.sh
-# run:
-#   # : bundle exec puma -C config/puma.rb
-#   web: nginx -g 'daemon off;'
+run:
+  # : bundle exec puma -C config/puma.rb
+  worker: gunicorn store.wsgi --log-file - --bind 127.0.0.1:8087

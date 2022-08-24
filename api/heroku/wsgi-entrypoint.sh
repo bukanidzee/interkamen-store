@@ -23,8 +23,6 @@ done
 
 dos2unix ./store/wsgi.py
 
-gunicorn store.wsgi --log-file - --bind 127.0.0.1:8087
-
 # gunicorn store.wsgi --bind my-training-react-project.herokuapp.com:8000 --workers 4 --threads 4
 
 #####################################################################################
