@@ -10,8 +10,8 @@ build:
     web: ./front/Dockerfile
     api: ./api/Dockerfile
   config:
-    REACT_APP_API_ORIGIN: ${REACT_APP_API_ORIGIN}
-    NODE_ENV: ${NODE_ENV}
+    REACT_APP_API_ORIGIN: $REACT_APP_API_ORIGIN
+    NODE_ENV: $NODE_ENV
 # release:
 #   command:
 #     - ./deployment-tasks.sh
