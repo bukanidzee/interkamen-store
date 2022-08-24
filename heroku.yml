@@ -8,7 +8,7 @@ setup:
 build:
   docker:
     web: ./front/Dockerfile
-    api: ./api/Dockerfile
+    worker: ./api/Dockerfile
   config:
     REACT_APP_API_ORIGIN: /api/
     NODE_ENV: production
