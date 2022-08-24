@@ -2,8 +2,8 @@ setup:
   addons:
     - plan: heroku-postgresql
       as: DATABASE
-  # config:
-  #   env_file: .env
+  config:
+    env_file: .env
     # S3_BUCKET: my-example-bucket
 build:
   docker:
