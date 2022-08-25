@@ -7,16 +7,16 @@ server {
         try_files $uri $uri/ /index.html;
     }
 
-    location /api {
-        try_files $uri @proxy_api;
-    }
-    location /admin {
-        try_files $uri @proxy_api;
-    }
+    #location /api {
+    #    try_files $uri @proxy_api;
+    #}
+    #location /admin {
+    #    try_files $uri @proxy_api;
+    #}
+    #proxy_set_header X-Forwarded-Proto https;
+    #proxy_set_header X-Url-Scheme $scheme;
 
-    location @proxy_api {
-        proxy_set_header X-Forwarded-Proto https;
-        proxy_set_header X-Url-Scheme $scheme;
+    location ~ ^/(api|admin)/ {
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header Host $http_host;
         proxy_redirect off;
