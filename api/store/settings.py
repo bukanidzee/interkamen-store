@@ -250,4 +250,5 @@ CORS_ALLOWED_ORIGINS = [
     'http://localhost:3000',
     'http://localhost:5432',
     'http://localhost:8080',
+    'http://my-training-react-project.herokuapp.com'
 ]
