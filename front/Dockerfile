@@ -11,8 +11,8 @@ WORKDIR /app/
 COPY package.json .
 COPY package-lock.json .
 
-#RUN npm install
-RUN npm ci --silent
+RUN npm install
+#RUN npm ci --silent
 
 ARG REACT_APP_API_ORIGIN
 
