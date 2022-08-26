@@ -25,13 +25,13 @@ RUN python -m venv venv && . venv/bin/activate && pip install -r requirements.tx
 COPY heroku/wsgi-entrypoint.sh /entry/wsgi-entrypoint.sh
 COPY heroku/gunicorn/ /etc/systemd/system/
 #RUN cp -a /api/. /app
-COPY . app/
+COPY . .
 
-RUN mkdir app/django_static
-VOLUME app/django_static
+RUN mkdir /django_static
+VOLUME /django_static
 
 RUN chmod +x /entry/wsgi-entrypoint.sh
-RUN chmod +x /app/manage.py
+RUN chmod +x app/manage.py
 
 #CMD ["/entry/wsgi-entrypoint.sh"]
 
