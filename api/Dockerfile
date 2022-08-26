@@ -12,11 +12,14 @@ ENV PYTHONUNBUFFERED=1
 #RUN mkdir -p /app
 WORKDIR /app/
 
-#RUN cp -a Pipfile /app && cp -a /api/Pipfile.lock /app
-COPY Pipfile* ./
+#COPY Pipfile* ./
+
+COPY requirements.txt ./
 
 # Установка зависимостей
-RUN pip install pipenv && pipenv install --system && rm -Rf /root/.cache/pip/
+#RUN pip install pipenv && pipenv install --system && rm -Rf /root/.cache/pip/
+
+RUN python -m venv venv && source venv/bin/activate && pip install -r requirements.txt
 
 # Скопировать проект
 COPY heroku/wsgi-entrypoint.sh /entry/wsgi-entrypoint.sh
