@@ -31,7 +31,7 @@ RUN mkdir /django_static
 VOLUME /django_static
 
 RUN chmod +x /entry/wsgi-entrypoint.sh
-RUN chmod +x /manage.py
+RUN chmod +x ./manage.py
 
 #CMD ["/entry/wsgi-entrypoint.sh"]
 
