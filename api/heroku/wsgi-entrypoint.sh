@@ -5,6 +5,11 @@ do
   echo "Waiting for server..."
 done
 
+until . venv/bin/activate
+do
+  echo "Waiting for virtual environment..."
+done
+
 dos2unix ./manage.py
 
 until ./manage.py makemigrations
