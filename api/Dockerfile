@@ -35,4 +35,4 @@ RUN chmod +x /app/manage.py
 
 #CMD ["/entry/wsgi-entrypoint.sh"]
 
-CMD ls -l && gunicorn store.wsgi --log-file - --bind 127.0.0.1:8087
+CMD ls -l && gunicorn store.wsgi:application --log-file - --bind 127.0.0.1:8087
