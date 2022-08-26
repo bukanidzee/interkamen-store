@@ -1,7 +1,7 @@
 # Установка базового имаджа
 FROM python:3.7
 
-RUN apt-get update && apt-get install bash && apt-get install dos2unix && apt-get install tree
+RUN apt-get update && apt-get install bash && apt-get install dos2unix
 
 # Установка переменных среды
 ENV PYTHONDONTWRITEBYTECODE=1
@@ -12,8 +12,6 @@ ENV PYTHONUNBUFFERED=1
 #RUN mkdir -p /app
 WORKDIR /app/
 
-RUN tree
-
 #COPY Pipfile* ./
 
 COPY requirements.txt ./
@@ -22,7 +20,6 @@ COPY requirements.txt ./
 #RUN pip install pipenv && pipenv install --system && rm -Rf /root/.cache/pip/
 
 RUN python -m venv venv && . venv/bin/activate && pip install -r requirements.txt
-RUN bin/sh -c 'cd venv; ls -l; cd ..'
 
 # Скопировать проект
 COPY heroku/wsgi-entrypoint.sh /entry/wsgi-entrypoint.sh
@@ -38,4 +35,4 @@ RUN chmod +x /app/manage.py
 
 #CMD ["/entry/wsgi-entrypoint.sh"]
 
-CMD bin/sh -c 'ls -l; cd ..; ls -l' && gunicorn store.wsgi --log-file - --bind 127.0.0.1:8087
+#CMD gunicorn store.wsgi --log-file - --bind 127.0.0.1:8087
