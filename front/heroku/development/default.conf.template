@@ -1,5 +1,9 @@
 server {
     listen $PORT default_server;
+    server_name _;
+
+    access_log /var/log/nginx/access.log;
+    error_log /var/log/nginx/error.log;
 
     location / {
         root   /usr/share/nginx/html;
