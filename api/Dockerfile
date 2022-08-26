@@ -12,7 +12,7 @@ ENV PYTHONUNBUFFERED=1
 #RUN mkdir -p /app
 WORKDIR /app/
 
-RUN bin/sh -c 'tree'
+RUN tree
 
 #COPY Pipfile* ./
 
