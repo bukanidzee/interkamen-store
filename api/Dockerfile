@@ -19,7 +19,7 @@ COPY requirements.txt ./
 # Установка зависимостей
 #RUN pip install pipenv && pipenv install --system && rm -Rf /root/.cache/pip/
 
-RUN python -m venv venv && source venv/bin/activate && pip install -r requirements.txt
+RUN python -m venv venv && . venv/bin/activate && pip install -r requirements.txt
 
 # Скопировать проект
 COPY heroku/wsgi-entrypoint.sh /entry/wsgi-entrypoint.sh
