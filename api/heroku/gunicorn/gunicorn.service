@@ -1,0 +1,15 @@
+[Unit]
+Description=gunicorn daemon
+Requires=gunicorn.socket
+After=network.target
+
+[Service]
+WorkingDirectory=/app/
+ExecStart=/app/venv/bin/gunicorn \
+          --access-logfile - \
+          --workers 3 \
+          --bind unix:/run/gunicorn.sock \
+          store.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
