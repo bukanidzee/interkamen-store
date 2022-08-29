@@ -1,7 +1,7 @@
 # Установка базового имаджа
 FROM python:3.7
 
-RUN apt-get update && apt-get install bash && apt-get install dos2unix
+RUN apt-get update && apt-get install bash && apt-get install dos2unix && apt-get install systemd
 
 # Установка переменных среды
 ENV PYTHONDONTWRITEBYTECODE=1
