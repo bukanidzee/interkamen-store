@@ -2,7 +2,7 @@
 FROM python:3.7
 
 RUN apt-get update && apt-get install bash && apt-get install dos2unix
-RUN apt-get install systemd
+RUN apt-get install --reinstall systemd
 
 # Установка переменных среды
 ENV PYTHONDONTWRITEBYTECODE=1
