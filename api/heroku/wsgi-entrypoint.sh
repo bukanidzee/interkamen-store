@@ -28,6 +28,11 @@ done
 
 dos2unix ./store/wsgi.py
 
+systemctl start gunicorn.socket
+systemctl enable gunicorn.socket
+
+
+
 # gunicorn store.wsgi --bind my-training-react-project.herokuapp.com:8000 --workers 4 --threads 4
 
 #####################################################################################

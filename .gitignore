@@ -5,6 +5,7 @@ not_needed
 #api
 api/.pytest_cache
 api/django_static
+api/venv
 api/tests
 api/pytest.ini
 api/media

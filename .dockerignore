@@ -3,6 +3,7 @@ api/.pytest_cache
 api/django_static
 api/tests
 api/.env
+api/venv
 api/pytest.ini
 api/*/migrations/*
 !api/*/migrations/__init__.py
