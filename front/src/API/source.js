@@ -1,3 +1,10 @@
-import 'process'
+const API_ORIGIN = process.env.REACT_APP_API_ORIGIN || 'http://127.0.0.1:8000/api/'
 
-export const API_ORIGIN = process?.env?.REACT_APP_API_ORIGIN || 'http://127.0.0.1:8000/api/'
+// const API_URL = new String(API_ORIGIN)
+// console.log(API_URL)
+
+const getUrl = (path) => {
+  return `${API_ORIGIN}${path}`
+}
+
+export default getUrl

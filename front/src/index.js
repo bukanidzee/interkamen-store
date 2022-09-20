@@ -7,7 +7,6 @@ import {Provider} from 'react-redux';
 import * as Sentry from "@sentry/react";
 import { BrowserTracing } from "@sentry/tracing";
 
-
 Sentry.init({
   dsn: "https://80c9d447ad2341dd8ad47c7d7de12193@o1278596.ingest.sentry.io/6478842",
   integrations: [new BrowserTracing()],

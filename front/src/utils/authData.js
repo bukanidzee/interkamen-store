@@ -29,9 +29,13 @@ export const deleteAuthData = (setOrder, logout) => {
 
 export const getCurrentOrder = async (is_staff,
                                       setOrder) => {
+  console.log("get current order called")
+  console.log(typeof(is_staff))
+  console.log(is_staff)
   if (!is_staff) {
     await OrderService.get_current_order(
        (response) => {
+         console.log(response)
          setOrder(response)
        })
   }

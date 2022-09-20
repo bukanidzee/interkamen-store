@@ -6,22 +6,12 @@ const LoadingOrMessage = ({...props}) =>
     <>
       {props.children}
       {props.isLoading &&
-          <div style={{
-                      display:'flex',
-                      justifyContent:'center',
-                      marginTop: 50}}>
-            <Loader />
-          </div>
+          <Loader />
         }
     </>
     :
       props.isLoading ?
-        <div style={{
-                    display:'flex',
-                    justifyContent:'center',
-                    marginTop: 50}}>
-          <Loader />
-        </div>
+        <Loader />
       :
         <h1 className='h1-center'>{props.message}</h1>
     }

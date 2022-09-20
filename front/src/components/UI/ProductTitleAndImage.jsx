@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const ProductTitleAndImage = ({product, index}) =>
   <>
-    <Col sm={2} key={`${product.id}_title`}>
+    <Col sm={3} key={`${product.id}_title`}>
       <Link to={`/store/${ product.id }`}>
         <strong>{index+1}. {product.title}</strong>
       </Link>

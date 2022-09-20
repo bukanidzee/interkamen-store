@@ -60,7 +60,10 @@ class Order(LifecycleModelMixin, models.Model):
         elif self.status == 'closed' or self.status == 'dropped':
             postfact = 'finished ' + self.format_time(self.finished)
 
-        return self.status + ' order ' + postfact + ' with id=' + str(self.id)
+        return '{} {} order {} with id={}'.format(self.status,
+                                                  self.owner,
+                                                  postfact,
+                                                  str(self.id))
 
         # def save(self, *args, **kwargs):
         #     if self.id:

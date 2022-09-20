@@ -10,10 +10,10 @@ const ProductItemInfo = ({item, index}) => {
     <Container className='product_item_card'>
       <Row>
         <ProductTitleAndImage product={item.product} index={index}/>
-        <Col style={{alignItems:'center'}}>
+        <Col style={{justifyContent:'center'}}>
           Количество: {item.quantity}
         </Col>
-        <Col style={{alignItems:'center'}}>
+        <Col style={{justifyContent:'center'}}>
           Общая цена: {item.prize} руб.
         </Col>
       </Row>

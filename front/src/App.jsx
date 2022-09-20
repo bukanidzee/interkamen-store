@@ -4,7 +4,7 @@ import {useLocation, useNavigate} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import './static/css/app.css';
-import '../public/favicon.ico'
+// import '../public/favicon.ico'
 import AppRouter from './components/router/AppRouter';
 import ModalLoader from './components/UI/modal/ModalLoader';
 import Errors from './components/UI/errors/Errors';
@@ -21,6 +21,7 @@ const App = () => {
   const fullname = useSelector(state => state.auth.fullname)
 
   const getOrder = useAPI( async (is_staff) => {
+    console.log('getOrder called')
     await getCurrentOrder(is_staff, setOrder).then(() => {
       login({fullname:localStorage.getItem('fullname'),
              is_staff:is_staff,
@@ -37,9 +38,11 @@ const App = () => {
   }, [location.state, fullname])
 
   useEffect(() => {
-    if (localStorage.getItem('authKey')) {
-      axios.defaults.headers.common['Authorization'] = localStorage.getItem('authKey')
-      getOrder(localStorage.getItem('is_staff'))
+    let authKey = localStorage.getItem('authKey')
+    if (authKey) {
+      axios.defaults.headers.common['Authorization'] = authKey
+      let is_staff = localStorage.getItem('is_staff')
+      getOrder(is_staff === 'true' ? true : false) 
     } else {
       setLoadingFalse();
     }

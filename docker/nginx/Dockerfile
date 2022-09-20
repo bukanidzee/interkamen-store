@@ -20,5 +20,6 @@ RUN npm run build-webpack
 # The second stage
 # Copy React static files and start nginx
 FROM nginx:stable-alpine
+COPY ./docker/nginx/development /etc/nginx/conf.d
 COPY --from=build /app/dist /usr/share/nginx/html
 CMD ["nginx", "-g", "daemon off;"]

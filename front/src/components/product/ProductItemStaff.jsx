@@ -15,9 +15,9 @@ const ProductItemStaff = ({product,
       </Col>
       <Col sm>
         <ProductDescStaff productId={product.id}
-                                 index={index}
-                                 deleteChoosedProduct={deleteChoosedProduct}
-                                 status={status}/>
+                          index={index}
+                          deleteChoosedProduct={deleteChoosedProduct}
+                          status={status}/>
       </Col>
     </>
   )

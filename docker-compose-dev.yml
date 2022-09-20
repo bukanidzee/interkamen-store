@@ -12,7 +12,7 @@ services:
         ports:
             - 80:80
         volumes:
-            - "./docker/nginx/development:/etc/nginx/conf.d"
+            - "nginx_volume:/etc/nginx/conf.d"
             - "static_volume:/app/django_static"
 
         depends_on:
@@ -60,6 +60,7 @@ services:
 volumes:
     static_volume: {}
     postgres_volume:
+    nginx_volume:
 
 # - "static_volume:/app/django_static"
 #             - "./api:/app/"

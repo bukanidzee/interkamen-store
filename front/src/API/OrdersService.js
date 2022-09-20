@@ -1,5 +1,5 @@
 import handleRequest from './Request';
-import {API_ORIGIN} from './source';
+import getUrl from './source';
 
 export default class OrderService {
   static async get_orders(p, callback) {
@@ -10,28 +10,31 @@ export default class OrderService {
         params[key] = p[key]
       }
     }
-
-    await handleRequest({url:`${API_ORIGIN}order/`,
+    const reqUrl = getUrl(`order/`)
+    await handleRequest({url:reqUrl,
                          method: 'get',
                          params: params
                        }, callback);
   };
 
   static async get_order(id, callback) {
-    await handleRequest({url:`${API_ORIGIN}order/${id}/`,
+    const reqUrl = getUrl(`order/${id}/`)
+    await handleRequest({url: reqUrl,
                          method: 'get',
                        }, callback);
   }
 
   static async get_current_order(callback) {
-    await handleRequest({url:`${API_ORIGIN}order/current/`,
+    const reqUrl = getUrl(`order/current/`)
+    await handleRequest({url:reqUrl,
                          method: 'get',
                        }, callback);
   }
 
   static async partial_update(id, data, callback) {
     // console.log(data)
-    await handleRequest({url:`${API_ORIGIN}order/${id}/`,
+    const reqUrl = getUrl(`order/${id}/`)
+    await handleRequest({url:reqUrl,
                          method:'patch',
                          data:data}, callback);
   }

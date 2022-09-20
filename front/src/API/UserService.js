@@ -1,34 +1,38 @@
 import handleRequest from './Request';
-import {API_ORIGIN} from './source';
+import getUrl from './source';
 
 export default class UserService {
   static async login(data, callback) {
+    const reqUrl = getUrl('rest-auth/login/')
     await handleRequest({
       method:'post',
-      url:`${API_ORIGIN}rest-auth/login/`,
+      url: reqUrl,
       data:data
     }, callback)
   }
 
   static async logout(callback) {
+    const reqUrl = getUrl('rest-auth/logout/')
     await handleRequest({
       method: 'post',
-      url: `${API_ORIGIN}rest-auth/logout/`,
+      url: reqUrl,
     }, callback)
   }
 
   static async registration(data, callback) {
+    const reqUrl = getUrl('rest-auth/registration/')
     await handleRequest({
       method: 'post',
-      url: `${API_ORIGIN}rest-auth/registration/`,
+      url: reqUrl,
       data: data
     }, callback)
   }
 
   static async getUser(id, callback) {
+    const reqUrl = getUrl(`customuser/${id}`)
     await handleRequest({
       method: 'get',
-      url: `${API_ORIGIN}customuser/${id}`,
+      url: reqUrl,
     }, callback)
   }
 
@@ -39,49 +43,55 @@ export default class UserService {
         params[key] = p[key]
       }
     }
+    const reqUrl = getUrl('customuser/')
     await handleRequest({
       method: 'get',
       params: params,
-      url: `${API_ORIGIN}customuser/`,
+      url: reqUrl,
     }, callback)
   }
 
   static async patchUser(id, data, callback) {
+    const reqUrl = getUrl(`customuser/${id}/`)
     await handleRequest({
       method: 'patch',
-      url: `${API_ORIGIN}customuser/${id}/`,
+      url: getUrl(reqUrl),
       data: data
     }, callback)
   }
 
   static async emailConfirm(key, callback) {
+    const reqUrl = getUrl('rest-auth/registration/verify-email/')
     await handleRequest({
       method: 'post',
-      url: `${API_ORIGIN}rest-auth/registration/verify-email/`,
+      url: reqUrl,
       data: {key: key}
     }, callback)
   }
 
   static async changePassword(data, callback) {
+    const reqUrl = getUrl('rest-auth/password/change/')
     await handleRequest({
       method: 'post',
-      url: `${API_ORIGIN}rest-auth/password/change/`,
+      url: reqUrl,
       data: data
     }, callback)
   }
 
   static async resetPassword(data, callback) {
+    const reqUrl = getUrl('rest-auth/password/reset/')
     await handleRequest({
       method: 'post',
-      url: `${API_ORIGIN}rest-auth/password/reset/`,
+      url: reqUrl,
       data: data
     }, callback)
   }
 
   static async confirmResetPassword(data, callback) {
+    const reqUrl = getUrl('rest-auth/password/reset/confirm/')
     await handleRequest({
       method: 'post',
-      url: `${API_ORIGIN}rest-auth/password/reset/confirm/`,
+      url:reqUrl,
       data: data
     }, callback)
   }

@@ -14,7 +14,7 @@ export default async function handleRequest (requestData, callback) {
   await axios(requestData)
     .then(async res => {
       // console.log(res)
-      if (callback && res?.data){
+      if (callback && res.data){
         await callback(res.data)
       } else if (callback){
         await callback()
