@@ -2,56 +2,56 @@ const path = require('path')
 const HtmlWebPackPlugin = require("html-webpack-plugin")
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const webpack = require('webpack')
 
+let isProduction = process.env.NODE_ENV === 'production'
+
 const plugins = [
+  new CleanWebpackPlugin(),
+  // new webpack.HotModuleReplacementPlugin(),
   new HtmlWebPackPlugin({
     template: path.resolve( __dirname, 'public/index.html' ),
     filename: 'index.html',
-    favicon: './public/favicon.ico'
+    favicon: 'public/favicon.ico'
   }),
   new MiniCssExtractPlugin({
-    filename: '[name].[contenthash].css', // Формат имени файла
+    filename: isProduction ? '[name].[contenthash].css' : '[name].css', // Формат имени файла
   }),
   new webpack.ProvidePlugin({
     process: 'process/browser',
   }),
-  new webpack.DefinePlugin({
-    'process.env': {
-      REACT_APP_API_ORIGIN: JSON.stringify(process.env.REACT_APP_API_ORIGIN)
-    }
-  }),
+  // new webpack.DefinePlugin({
+  //   'process.env': {
+  //     REACT_APP_API_ORIGIN: JSON.stringify(process.env.REACT_APP_API_ORIGIN)
+  //   }
+  // }),
+  new webpack.EnvironmentPlugin(['REACT_APP_API_ORIGIN']),
   // new webpack.EnvironmentPlugin(['REACT_APP_API_ORIGIN']),
   new webpack.SourceMapDevToolPlugin({
     filename: "[file].map"
   }),
 ]
 
-let mode = 'development'
-let target = 'web'
-
-if (process.env.NODE_ENV === 'production'){
-  mode = 'production'
-  target = 'browserlist'
-}
+// let target = 'web'
 
 if (process.env.SERVE) { // Используем плагин только если запускаем devServer
   plugins.push(new ReactRefreshWebpackPlugin());
 }
 
 module.exports = {
-  mode: mode,
-  target: target,
-  entry: "./src/index.js",
+  mode: isProduction ? 'production' : 'development',
+  // target: target,
+  entry: {front: path.resolve(__dirname, "./src/index.js")},
   output: {
-    filename: 'bundle.js',
+    filename: isProduction ? '[name].[contenthash].js' : '[name].js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
     assetModuleFilename: 'assets/[hash][ext][query]'
   },
   plugins: plugins,
   resolve: {
-    extensions: ['.js', '.jsx'],
+    extensions: ['*', '.js', '.jsx'],
     // alias: {
     //    process: "process/browser"
     // }
@@ -65,35 +65,41 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             cacheDirectory: true,
+            plugins: [
+              !isProduction && require("react-refresh/babel")
+            ].filter(Boolean),
+            presets: ['@babel/preset-env',
+                      ['@babel/preset-react', {"runtime": "automatic"}]],
           }
         }
       },
-      // {
-      //   test: /\.html$/,
-      //   use: ['html-loader']
-      // },
-      {
-        test: /\.json$/,
-        loader: 'json-loader'
-      },
       {
         test: /\.css$/i,
-        use: [process.env.NODE_ENV === 'production' ?
+        use: [isProduction ?
                 MiniCssExtractPlugin.loader :
                 'style-loader',
-              'css-loader']
+              {
+                loader: 'css-loader',
+                options: {
+                  // modules: true,
+                  sourceMap: !isProduction
+                }
+              },
+              // 'postcss-loader'
+            ]
       },
       {
         test: /\.(png|jpg|jpeg|ico)$/,
         exclude: /node_modules/,
-        type: mode === 'production' ? 'asset' : 'asset/resource',
-        // parser: { dataUrlCondition: { maxSize: 15000 } },
+        type: isProduction ? 'asset' : 'asset/resource',
+        // type: 'asset',
+        parser: { dataUrlCondition: { maxSize: 15000 } },
       },
-      // {
-      //   test: /\.(js|jsx)$/,
-      //   enforce: 'pre',
-      //   use: ['source-map-loader'],
-      // },
+      {
+        test: /\.(js)$/,
+        enforce: 'pre',
+        use: ['source-map-loader'],
+      },
       {
         test: /\.svg$/,
         use: ['@svgr/webpack'],

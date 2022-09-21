@@ -21,7 +21,6 @@ const App = () => {
   const fullname = useSelector(state => state.auth.fullname)
 
   const getOrder = useAPI( async (is_staff) => {
-    console.log('getOrder called')
     await getCurrentOrder(is_staff, setOrder).then(() => {
       login({fullname:localStorage.getItem('fullname'),
              is_staff:is_staff,
@@ -42,7 +41,7 @@ const App = () => {
     if (authKey) {
       axios.defaults.headers.common['Authorization'] = authKey
       let is_staff = localStorage.getItem('is_staff')
-      getOrder(is_staff === 'true' ? true : false) 
+      getOrder(is_staff === 'true' ? true : false)
     } else {
       setLoadingFalse();
     }

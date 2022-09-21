@@ -7,7 +7,7 @@ import {useState} from 'react'
 
 const Orders = () => {
   const is_staff = useIsStaff()
-  let [status, setStatus] = useState(is_staff==='true' ?
+  let [status, setStatus] = useState(is_staff ?
                                       'processing'
                                      :
                                       'current')
