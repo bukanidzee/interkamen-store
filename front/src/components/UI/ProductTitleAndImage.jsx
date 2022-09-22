@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 
 const ProductTitleAndImage = ({product, index}) =>
   <>
-    <Col sm={3} key={`${product.id}_title`}>
+    <Col xl={3} sm={2} key={`${product.id}_title`}>
       <Link to={`/store/${ product.id }`}>
         <strong>{index+1}. {product.title}</strong>
       </Link>
     </Col>
     {product.image &&
-      <Col sm={3} key={`${product.id}_image`}>
+      <Col xl={3} sm={4} key={`${product.id}_image`}>
         <img src={product.image}
              className = 'in-card-image'
              alt={`${ product.title }_image`}/>

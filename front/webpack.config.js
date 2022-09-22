@@ -9,7 +9,6 @@ let isProduction = process.env.NODE_ENV === 'production'
 
 const plugins = [
   new CleanWebpackPlugin(),
-  // new webpack.HotModuleReplacementPlugin(),
   new HtmlWebPackPlugin({
     template: path.resolve( __dirname, 'public/index.html' ),
     filename: 'index.html',
@@ -27,7 +26,6 @@ const plugins = [
   //   }
   // }),
   new webpack.EnvironmentPlugin(['REACT_APP_API_ORIGIN']),
-  // new webpack.EnvironmentPlugin(['REACT_APP_API_ORIGIN']),
   new webpack.SourceMapDevToolPlugin({
     filename: "[file].map"
   }),
@@ -55,6 +53,10 @@ module.exports = {
     // alias: {
     //    process: "process/browser"
     // }
+    alias: {
+      'react-virtualized/List': 'react-virtualized-reactv17/dist/es/List',
+      'react-virtualized/styles.css': 'react-virtualized-reactv17/styles.css'
+  },
   },
   module: {
     rules:[

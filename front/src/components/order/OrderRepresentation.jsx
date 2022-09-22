@@ -5,6 +5,7 @@ import UserService from '../../API/UserService';
 import {getPageCount} from '../../utils/pages';
 import {ordersCallback} from '../../utils/callbacks/ordersCallback';
 import {handleHeightChange} from '../../utils/scrolling';
+import {orderSortOptions} from '../../utils/buttons/orderSortOptions';
 
 import { useEffect, useState, useRef, useMemo, useCallback } from 'react';
 import {useIsStaff} from '../../hooks/useAuthData';
@@ -67,18 +68,7 @@ const OrderRepresentation = ({status}) => {
 
 
   const sortOptions = useMemo(() => {
-    return ['closed', 'dropped'].indexOf(status) !== -1 ?
-      [{value: 'prize_plus', name:'Цена от наименьшей'},
-       {value: 'prize_minus', name:'Цена от наибольшей'},
-       {value: 'created_plus', name:'Дата создания от новейшего'},
-       {value: 'created_minus', name:'Дата создания от cтарейшего'},
-       {value: 'finished_plus', name:'Дата закрытия от новейшего'},
-       {value: 'finished_minus', name:'Дата закрытия от старейшего'},]
-       :
-       [{value: 'prize_plus', name:'Цена от наименьшей'},
-        {value: 'prize_minus', name:'Цена от наибольшей'},
-        {value: 'created_plus', name:'Дата создания от новейшего'},
-        {value: 'created_minus', name:'Дата создания от cтарейшего'},];
+    return orderSortOptions(status)
   }, [status])
 
   const orderBodyRef = useRef(null)
@@ -129,7 +119,8 @@ const OrderRepresentation = ({status}) => {
           <Col sm={7}>
             <div ref={orderBodyRef}
                  className='sticky-top'
-                 style={{overflowY:'auto'}}>
+                 style={{overflowY:'auto',
+                         overflowX:'hidden'}}>
               <OrderDetail orderId={choosedOrder}
                            index={orders.indexOf(orders.find((el) => el.id===choosedOrder))}
                            orders={orders}

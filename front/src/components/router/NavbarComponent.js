@@ -1,83 +1,35 @@
-import React from 'react';
-import Button from 'react-bootstrap/Button';
 import {useNavigate} from 'react-router-dom';
-import '../static/css/components/navbar.css';
-import BasketIcon from '../static/images/basket.svg';
+import '../../static/css/components/navbar.css';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import NavDropdown from 'react-bootstrap/NavDropdown';
-import LogoImg from '../static/images/logo_name.png';
-import {navLinks} from '../navigation/navLinks';
-import {useLogout} from '../hooks/useLogout';
-import {useIsStaffAndFullname} from '../hooks/useAuthData';
-import {useSelector} from 'react-redux';
+import NavbarNav from './NavbarNav';
+import NavbarUser from './NavbarUser';
+import LogoImg from '../../static/images/logo_name.png';
+import {useMediaQuery} from 'react-responsive';
+import classnames from 'classnames';
 
 const NavbarComponent = () => {
     const navigate = useNavigate();
-    const [is_staff, fullname] = useIsStaffAndFullname();
-    const {items} = useSelector(state => state.currentOrder)
-    const logoutClick = useLogout()
+    const isStretched = useMediaQuery({ maxWidth: 1200})
 
     return(
-      <Navbar className='navbar' expand='lg'>
+      <Navbar className={classnames('navbar',
+                                    {'fixed-position': isStretched})}
+              collapseOnSelect
+              expand="xl">
         <Container fluid>
-          <div className='navbar-set'>
-            <Navbar.Brand href='/'>
-              <img className='head-img'
-                   src={LogoImg}
-                   alt='logo'/>
-            </Navbar.Brand>
-            <Nav variant='pills' className='navbar-set'>
-              {navLinks.map((bar) =>
-                  <NavDropdown title={bar.title}
-                               key={bar.title}>
-                    {bar.links.map((link) =>
-                      <NavDropdown.Item
-                        key={link.name}
-                        onClick={(() => navigate(link.to))}>
-                        {link.name}
-                      </NavDropdown.Item>
-                    )}
-                  </NavDropdown>
-              )}
-            </Nav>
-          </div>
-          {fullname ?
-            <div className='navbar-set'>
-              <Nav variant='pills' className='navbar-set'>
-                <NavDropdown title={fullname}>
-                  <NavDropdown.Item onClick={() => navigate('/user')}>
-                    Редактировать
-                  </NavDropdown.Item>
-                  <NavDropdown.Item onClick={() => navigate('/password/change')}>
-                    Смена пароля
-                  </NavDropdown.Item>
-                  <NavDropdown.Item onClick={() => logoutClick()}>
-                    Выйти
-                  </NavDropdown.Item>
-                </NavDropdown>
-              </Nav>
-              <Button
-                variant='dark'
-                onClick={() => navigate('/orders')}>
-                  <svg fill="currentColor" width={22} height={22}>
-                    <BasketIcon />
-                  </svg>
-                  {!is_staff && items.length}
-              </Button>
-            </div> :
-            <div className='navbar-set'>
-              <Button variant='dark'
-                      onClick={() => navigate('/login')}>
-                Войти
-              </Button>
-              <Button variant='dark'
-                      onClick={() => navigate('/registration')}>
-                Зарегистрироваться
-              </Button>
-            </div>
-          }
+          <Navbar.Brand href='/'>
+            <img className='head-img'
+                 src={LogoImg}
+                 alt='logo'/>
+          </Navbar.Brand>
+          <Navbar.Toggle aria-controls="nav-collapse" />
+          <Navbar.Collapse id="nav-collapse"
+                           className='justify-content-between'>
+            <NavbarNav navigate={navigate}/>
+            <NavbarUser navigate={navigate}
+                        isStretched={isStretched}/>
+          </Navbar.Collapse>
         </Container>
       </Navbar>
     )

@@ -23,7 +23,7 @@ const App = () => {
   const getOrder = useAPI( async (is_staff) => {
     await getCurrentOrder(is_staff, setOrder).then(() => {
       login({fullname:localStorage.getItem('fullname'),
-             is_staff:is_staff,
+             is_staff:is_staff ? 'true' : 'false',
              userId:localStorage.getItem('userId')})
     }).finally(() =>{
       setLoadingFalse();

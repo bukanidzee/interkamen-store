@@ -2,9 +2,17 @@
 import {deleteAuthData} from '../authData';
 import {formErrors} from './formErrors';
 
-export function handleFetchErrors (err, appendError, setOrder, logout) {
+function deleteAuthCredentials(err, setOrder, logout) {
+  if (err.response?.data?.detail === 'Invalid token.' ||
+      err.response?.data?.detail === 'Недопустимый токен.') {
+    deleteAuthData(setOrder, logout)
+    appendError(`Произошла ошибка ${err.response.status}, пожалуйста авторизуйтесь повторно!`)
+  }
+}
 
-  if (err?.response) {
+export function handleFetchErrors (err, appendError, setOrder, logout) {
+  if (err.response) {
+    deleteAuthCredentials(err, setOrder, logout)
     if (err.response.status >= 500) {
       appendError(`Произошла ошибка ${err.response.status}, произошла внутренняя ошибка сервера!`)
     } else if (err.response.status === 400){
@@ -12,20 +20,14 @@ export function handleFetchErrors (err, appendError, setOrder, logout) {
     } else if (err.response.status === 401) {
       appendError(`Произошла ошибка ${err.response.status}, вы не авторизованы!`)
     } else if (err.response.status === 403) {
-      if (err.response.data.detail === 'Invalid token.' ||
-          err.response.data.detail === 'Недопустимый токен.') {
-        deleteAuthData(setOrder, logout)
-        appendError(`Произошла ошибка ${err.response.status}, пожалуйста авторизуйтесь повторно!`)
-      } else {
-        appendError(`Произошла ошибка ${err.response.status}, доступ запрещён!`)
-      }
+      appendError(`Произошла ошибка ${err.response.status}, доступ запрещён!`)
     } else if (err.response.status === 404) {
       appendError(`Произошла ошибка ${err.response.status}, страница не найдена!`)
     } else if (err.response.status > 404) {
       appendError(`Произошла ошибка ${err.response.status}, редкая ошибка запроса!`)
     }
   }
-  else if (err?.request) {
+  else if (err.request) {
     appendError('Не удалось получить ответ от сервера, проверьте соединение!')
   }
   else {

@@ -15,12 +15,13 @@ const ProductDescClient = ({product,
   const [count, setCount] = useState(item?.quantity || 1);
   const navigate = useNavigate();
 
+  const fetchCallbackActions = {
+    'addItem': () => navigate('/store'),
+    'deleteItem': () => navigate('/orders')
+  }
+
   const fetchCallback = useCallback((action) => {
-    if (action === 'addItem') {
-      navigate('/store')
-    } else if (action === 'deleteItem') {
-      navigate('/orders')
-    }
+    fetchCallbackActions[action]()
   })
 
   const fetchItem = useFetchItem(product,

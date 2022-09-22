@@ -1,10 +1,11 @@
 import LoaderSpinner from './LoaderSpinner';
 
-const Loader = () =>
+const Loader = ({fromTop}) =>
   <div style={{
               position:'relative',
-              top: '10%',
-              left: '50%'}}>
+              top: `${fromTop}%`,
+              display:'flex',
+              justifyContent:'center'}}>
     <LoaderSpinner />
   </div>
 

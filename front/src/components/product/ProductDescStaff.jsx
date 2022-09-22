@@ -1,4 +1,5 @@
 import {useNavigate} from 'react-router-dom';
+import {useMemo} from 'react';
 import OneButtonOrGroup from '../UI/buttons/OneButtonOrGroup';
 
 import {useAPI} from '../../hooks/useAPI';
@@ -22,20 +23,22 @@ const ProductDescStaff = ({productId,
     )
   })
 
-  const buttons = status === 'active' ?
-    [{name:'Изменить продукт',
-      action:() => {
-        navigate(`/store/${productId}/change`)
-      }},
-      {name:'Архивировать продукт',
-       action:() => {
+  const buttons = useMemo(() =>
+    status === 'active' ?
+      [{name:'Изменить продукт',
+        action:() => {
+          navigate(`/store/${productId}/change`)
+        }},
+        {name:'Архивировать продукт',
+         action:() => {
           patchProduct('archive')
-      }}]
-    :
-    [{name:'Сделать продукт активным',
-      action:() => {
-        patchProduct('active')
-      }}]
+        }}]
+      :
+      [{name:'Сделать продукт активным',
+        action:() => {
+          patchProduct('active')
+        }}]
+  )
 
   return(
     <OneButtonOrGroup buttons={buttons}/>

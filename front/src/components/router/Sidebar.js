@@ -1,11 +1,7 @@
 import React from 'react';
-import '../static/css/components/sidebar.css';
+import '../../static/css/components/sidebar.css';
 import {Link} from 'react-router-dom';
-import {navLinks} from '../navigation/navLinks';
-
-
-// Import { render } from "react-dom";
-// import PropTypes from "prop-types";
+import {navLinks} from '../../navigation/navLinks';
 
 const Sidebar = () =>
   <div className='aside'>
