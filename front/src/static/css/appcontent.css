@@ -11,6 +11,7 @@
   width: 100%;
 }
 .in-box-image {
+  max-height: 300px;
   object-fit: scale-down;
   width: 100%
 }

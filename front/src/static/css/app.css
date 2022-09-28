@@ -25,6 +25,8 @@ body {
   hyphens: auto;
 }
 
-.content-box.small-text{
+.content-box.small-text,
+.content-box.small-text button,
+.content-box.small-text input{
   font-size: 0.75em;
 }
