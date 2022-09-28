@@ -6,6 +6,7 @@ import ProductService from '../API/ProductService';
 import {twoStatesFormSubmitAction} from '../utils/forms/formSubmitAction';
 import {handleFormsErrors} from '../utils/errors/handleErrors';
 import ChangeForm from '../components/UI/forms/ChangeForm';
+import CentrifyForm from '../components/UI/forms/CentrifyForm';
 import {useTwoStatesForm} from '../hooks/useForm';
 import {createFormData} from '../utils/forms/createFormData'
 
@@ -63,14 +64,16 @@ const ProductChange = () => {
   )
 
   return(
-    <ChangeForm header='Страница редактирования продукта'
-                condition={productId}
-                isLoading={isLoading}
-                form={form}
-                onSubmit={patchProduct}
-                setField={setField}
-                errors={errors}
-                ref={imageRef}/>
+    <CentrifyForm>
+      <ChangeForm header='Страница редактирования продукта'
+                  condition={productId}
+                  isLoading={isLoading}
+                  form={form}
+                  onSubmit={patchProduct}
+                  setField={setField}
+                  errors={errors}
+                  ref={imageRef}/>
+    </CentrifyForm>
   )
 }
 

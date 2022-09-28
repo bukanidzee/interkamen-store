@@ -4,6 +4,7 @@ import OrderRepresentation from '../components/order/OrderRepresentation';
 import CurrentOrderDetail from '../components/order/CurrentOrderDetail';
 import { useIsStaff } from '../hooks/useAuthData';
 import {useState} from 'react'
+import {useUserAgent} from '../hooks/useUserAgent';
 
 const Orders = () => {
   const is_staff = useIsStaff()
@@ -11,6 +12,7 @@ const Orders = () => {
                                       'processing'
                                      :
                                       'current')
+  const {isTabsBig} = useUserAgent()
 
   return(
     <div>
@@ -18,6 +20,7 @@ const Orders = () => {
         <h1 className='page-header'>Заказы</h1>
         <Tabs
             className = 'mb-3'
+            {...(!isTabsBig ? {style:{fontSize:'0.75em'}} : {})}
             activeKey={status}
             onSelect={k => setStatus(k)}
             justify

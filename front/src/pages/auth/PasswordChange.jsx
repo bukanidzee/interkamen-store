@@ -6,6 +6,7 @@ import {regularFormSubmitAction} from '../../utils/forms/formSubmitAction';
 import {handleFormsErrors} from '../../utils/errors/handleErrors';
 import {useForm} from '../../hooks/useForm';
 import RegularForm from '../../components/UI/forms/RegularForm';
+import CentrifyForm from '../../components/UI/forms/CentrifyForm';
 
 const PasswordChange = () => {
   const [form, errors, setErrors, setField] = useForm(['old_password',
@@ -30,12 +31,14 @@ const PasswordChange = () => {
   )
 
   return (
-    <RegularForm header='Смена пароля'
-                 onSubmit={changePassword}
-                 form={form}
-                 setField={setField}
-                 errors={errors}
-                 submitName='Сменить пароль'/>
+    <CentrifyForm>
+      <RegularForm header='Смена пароля'
+                   onSubmit={changePassword}
+                   form={form}
+                   setField={setField}
+                   errors={errors}
+                   submitName='Сменить пароль'/>
+    </CentrifyForm>
   )
 }
 

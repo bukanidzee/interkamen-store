@@ -5,7 +5,7 @@ import FormPreviewImage from './FormPreviewImage'
 const FormItem = forwardRef((props, ref) => {
 
   return(
-    <Form.Group className='mb-3'>
+    <Form.Group className='my-3 '>
       <Form.Label>{props.label}</Form.Label>
       {ref &&
         <FormPreviewImage value={props.value}

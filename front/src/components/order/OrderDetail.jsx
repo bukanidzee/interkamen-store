@@ -18,13 +18,13 @@ const OrderDetail = ({orderId,
                       setChoosed}) => {
     const [orderDetails, setOrderDetails] = useState({});
     const deleteChoosedOrder = useDeleteChoosedArrayElement(orders,
-                                                             setOrders,
-                                                             choosed,
-                                                             setChoosed)
+                                                            setOrders,
+                                                            choosed,
+                                                            setChoosed)
 
     useEffect(() => {
-      if (orderId >= 0) {
-        getOrder(orderId);
+      getOrder(orderId);
+      if (changeHeightFunc) {
         changeHeightFunc()
       }
     }, [orderId])

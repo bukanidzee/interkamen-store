@@ -16,7 +16,7 @@ const OrderBody = ({buttonAction,
   const buttons = useOrdersButtons(status, setModal, setActionData)
 
   return(
-    <div style={{marginTop:20}}>
+    <>
       <ModalConfirmationPage action={buttonAction}
                              actionData={actionData}
                              visible={modal}
@@ -47,7 +47,7 @@ const OrderBody = ({buttonAction,
         :
           <h1 className='h1-center'>В заказе нет продуктов</h1>
       }
-    </div>
+    </>
   )
 }
 

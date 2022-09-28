@@ -43,7 +43,7 @@ const SearchBarWithOptions = ({searchQuery, setSearchQuery, fetchFunc}) => {
              value={inputValue}
              onChange={(e) => setInputValue(e.target.value)}
              ref={inputRef}
-             placeholder='Введите ФИО или имя пользователя, не менее 2 символов'
+             placeholder='Введите ФИО или имя не менее 2 символов'
              list='selectOptions'/>
       <datalist id="selectOptions">
         {selectOptions.map(option =>

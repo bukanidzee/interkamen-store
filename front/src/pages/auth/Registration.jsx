@@ -2,6 +2,7 @@ import {useForm} from '../../hooks/useForm';
 import {useCallback} from 'react'
 
 import RegularForm from '../../components/UI/forms/RegularForm';
+import CentrifyForm from '../../components/UI/forms/CentrifyForm';
 import UserService from '../../API/UserService';
 import {useAPI} from '../../hooks/useAPI';
 import {useAction} from '../../hooks/useAction'
@@ -37,12 +38,14 @@ const Registration = () => {
   )
 
   return(
-    <RegularForm header='Регистрация'
-                 onSubmit={getUserKey}
-                 form={form}
-                 setField={setField}
-                 errors={errors}
-                 submitName='Зарегистрироваться'/>
+    <CentrifyForm>
+      <RegularForm header='Регистрация'
+                   onSubmit={getUserKey}
+                   form={form}
+                   setField={setField}
+                   errors={errors}
+                   submitName='Зарегистрироваться'/>
+    </CentrifyForm>
   )
 }
 

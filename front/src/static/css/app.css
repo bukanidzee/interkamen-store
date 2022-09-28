@@ -11,19 +11,20 @@ body {
   background-attachment: fixed;
   background-size: cover;
   overflow: auto;
-  min-width: 990px;
 }
 .content-box {
   position:relative;
-  margin-top: 150px;
-  padding: 10px 10px 0px;
+  padding: 10px 10px 10px;
   background: #f8f9fa;
   opacity: 0.9;
   border-width: 0px;
   border-radius: 5px;
   border-color: #B6B6B6;
   border-style: solid;
-  /* min-width: 710px; */
   height: auto;
-  min-height: calc(95vh - 150px);
+  hyphens: auto;
+}
+
+.content-box.small-text{
+  font-size: 0.75em;
 }

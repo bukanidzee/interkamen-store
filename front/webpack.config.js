@@ -7,6 +7,8 @@ const webpack = require('webpack')
 
 let isProduction = process.env.NODE_ENV === 'production'
 
+console.log(isProduction)
+
 const plugins = [
   new CleanWebpackPlugin(),
   new HtmlWebPackPlugin({
@@ -45,14 +47,12 @@ module.exports = {
     filename: isProduction ? '[name].[contenthash].js' : '[name].js',
     path: path.resolve(__dirname, 'dist'),
     clean: true,
-    assetModuleFilename: 'assets/[hash][ext][query]'
+    assetModuleFilename: 'assets/[hash][ext][query]',
+    publicPath: '/'
   },
   plugins: plugins,
   resolve: {
     extensions: ['*', '.js', '.jsx'],
-    // alias: {
-    //    process: "process/browser"
-    // }
     alias: {
       'react-virtualized/List': 'react-virtualized-reactv17/dist/es/List',
       'react-virtualized/styles.css': 'react-virtualized-reactv17/styles.css'
@@ -111,6 +111,7 @@ module.exports = {
   devtool: 'source-map',
 
   devServer: {
+    historyApiFallback: true,
     hot: true, // Включает автоматическую перезагрузку страницы при изменениях
 }
 }

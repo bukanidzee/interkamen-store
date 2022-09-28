@@ -3,13 +3,23 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import {formsFields} from '../../../utils/forms/formsFields';
 import {forwardRef} from 'react'
+import {useUserAgent} from '../../../hooks/useUserAgent';
+import classnames from 'classnames';
+// import CentrifyForm from './CentrifyForm'
 
 const RegularForm = forwardRef((props, ref) => {
+  const {isProductCardMedium} = useUserAgent()
+
   return(
-    <div className='d-flex flex-column'>
+    <div className='d-flex flex-column w-100'>
       {props.header &&
         <h1 className='page-header'>{props.header}</h1>}
-      <Form onSubmit={props.onSubmit} className='d-flex flex-column w-50 mx-auto'>
+      <Form onSubmit={props.onSubmit}
+            className={classnames('d-flex',
+                                  'flex-column',
+                                  {'w-50': isProductCardMedium},
+                                  {'w-75': !isProductCardMedium},
+                                  'mx-auto')}>
         {Object.keys(props.form).map(field =>
           <FormItem label={formsFields[field].label}
                     type={formsFields[field].type}

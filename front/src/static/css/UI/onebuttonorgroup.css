@@ -1,12 +1,11 @@
 .one-button {
   display: flex;
   justify-content: flex-end;
-  flex: 1 0;
 }
 
 .group-of-buttons {
   display: flex;
+  width: inherit;
   justify-content: space-between;
-  flex: 1 0;
-  flex-wrap: nowrap;
+  align-items: center;
 }

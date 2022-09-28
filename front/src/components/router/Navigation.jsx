@@ -5,16 +5,19 @@ import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import MediaQuery from 'react-responsive';
-
+import {useUserAgent} from '../../hooks/useUserAgent';
+import classnames from 'classnames';
 
 const Navigation = () => {
+  const {isBigHeadImg, sidebarVisible, isProductCardSmall} = useUserAgent()
+  const topContextMargin = isBigHeadImg ? 150 : 125
 
   return(
     <div style={{width: '100%'}}>
       <NavbarComponent />
       <Container style={{maxWidth:'inherit'}} className='m-0'>
-        <Row style={{flexWrap:'nowrap'}}>
-          <MediaQuery minWidth={1200}>
+        <Row>
+          <MediaQuery minWidth={sidebarVisible}>
             <Col xl='auto'>
               <div className="sticky-top" style={{zIndex:0}}>
                 <Sidebar />
@@ -22,7 +25,10 @@ const Navigation = () => {
             </Col>
           </MediaQuery>
           <Col>
-            <div className='content-box'>
+            <div className={classnames('content-box',
+                                       {'small-text':!isProductCardSmall})}
+                 style={{marginTop: topContextMargin,
+                         minHeight: `calc(95vh - ${topContextMargin}px)`}}>
                 <Outlet />
             </div>
           </Col>

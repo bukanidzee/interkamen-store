@@ -1,4 +1,5 @@
 import RegularForm from '../components/UI/forms/RegularForm'
+import CentrifyForm from '../components/UI/forms/CentrifyForm'
 import {useForm} from '../hooks/useForm';
 import ProductService from '../API/ProductService';
 import {useNavigate} from 'react-router-dom';
@@ -32,6 +33,7 @@ const ProductCreate = () => {
     regularFormSubmitAction(form, fetch, setErrors, handleErrors)
   )
   return(
+    <CentrifyForm>
       <RegularForm header='Создать продукт'
                    onSubmit={createProduct}
                    form={form}
@@ -39,6 +41,7 @@ const ProductCreate = () => {
                    errors={errors}
                    submitName='Создать'
                    ref={imageRef}/>
+    </CentrifyForm>
   )
 }
 

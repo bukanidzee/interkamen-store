@@ -7,6 +7,7 @@ import {useAPI} from '../../hooks/useAPI';
 import {regularFormSubmitAction} from '../../utils/forms/formSubmitAction';
 import {handleFormsErrors} from '../../utils/errors/handleErrors';
 import RegularForm from '../../components/UI/forms/RegularForm';
+import CentrifyForm from '../../components/UI/forms/CentrifyForm';
 
 const PasswordResetConfirm = () => {
   const navigate = useNavigate()
@@ -32,12 +33,14 @@ const PasswordResetConfirm = () => {
   )
 
   return(
-    <RegularForm header='Подтвердите сброс пароля.'
-                 onSubmit={confirmResetPassword}
-                 form={form}
-                 setField={setField}
-                 errors={errors}
-                 submitName='Подтвердить'/>
+    <CentrifyForm>
+      <RegularForm header='Подтвердите сброс пароля.'
+                   onSubmit={confirmResetPassword}
+                   form={form}
+                   setField={setField}
+                   errors={errors}
+                   submitName='Подтвердить'/>
+    </CentrifyForm>
   )
 }
 

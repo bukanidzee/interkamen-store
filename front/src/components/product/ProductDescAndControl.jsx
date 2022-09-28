@@ -16,11 +16,11 @@ const ProductDescAndControl = ({product,
       </Row>
       {is_staff ?
         <ProductDescStaff productId={productId}
-                                 status={product.status}/>
+                          status={product.status}/>
       :
         <ProductDescClient product={product}
-                                  item={item}
-                                  index={index}/>}
+                           item={item}
+                           index={index}/>}
     </Container>
   )
 }

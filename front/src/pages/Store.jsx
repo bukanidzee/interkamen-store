@@ -4,6 +4,7 @@ import {useAPI} from '../hooks/useAPI';
 import {useFirstLoadingCheck} from '../hooks/useFirstLoadingCheck'
 import {getPageCount} from '../utils/pages';
 import {useIsStaff} from '../hooks/useAuthData';
+import {useUserAgent} from '../hooks/useUserAgent';
 import Button from 'react-bootstrap/Button';
 import {useNavigate} from 'react-router-dom';
 import Tabs from 'react-bootstrap/Tabs';
@@ -24,6 +25,7 @@ const Store = () => {
   const [choosed, setChoosed] = useState(0);
   const [isProductsReady, setIsProductsReady] = useState(false)
   const [status, setStatus] = useState('active')
+  const {isProductCardMedium} = useUserAgent()
 
   const is_staff = useIsStaff()
   const navigate = useNavigate()
@@ -68,12 +70,14 @@ const Store = () => {
           <h1 className='page-header'>Каталог</h1>
           {is_staff &&
             <>
-              <Button style={{position:'absolute',
-                              top:5,
-                              right:5}}
-                      onClick={() => navigate('create')}>
-                + Добавить новый продукт
-              </Button>
+              <div style={{position:'absolute',
+                           top:5,
+                           right:5}}>
+                <Button onClick={() => navigate('create')}>
+                  {isProductCardMedium ? '+ Добавить новый продукт' :
+                                         '+ Добавить'}
+                </Button>
+              </div>
               <Tabs
                   className = 'mb-3'
                   defaultActiveKey={status}

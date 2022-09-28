@@ -4,7 +4,7 @@ import LoadingThenContent from '../loading/LoadingThenContent';
 import TwoStatesFormItem from './TwoStatesFormItem';
 
 const ChangeForm = forwardRef((props, ref) =>
-  <div className='d-flex flex-column'>
+  <div className='d-flex flex-column w-100'>
     {props.header &&
       <h1 className='page-header'>{props.header}</h1>}
     {props.condition &&

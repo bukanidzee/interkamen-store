@@ -5,21 +5,24 @@ import Container from 'react-bootstrap/Container';
 import NavbarNav from './NavbarNav';
 import NavbarUser from './NavbarUser';
 import LogoImg from '../../static/images/logo_name.png';
-import {useMediaQuery} from 'react-responsive';
+import {useUserAgent} from '../../hooks/useUserAgent';
 import classnames from 'classnames';
 
 const NavbarComponent = () => {
     const navigate = useNavigate();
-    const isStretched = useMediaQuery({ maxWidth: 1200})
+    const {isNavbarExpanded,
+           isSidebarVisible,
+           isBigHeadImg} = useUserAgent();
 
     return(
       <Navbar className={classnames('navbar',
-                                    {'fixed-position': isStretched})}
+                                    {'fixed-position': !isSidebarVisible})}
               collapseOnSelect
-              expand="xl">
+              expand="lg">
         <Container fluid>
           <Navbar.Brand href='/'>
             <img className='head-img'
+                 style={{height: isBigHeadImg ? 75 : 50}}
                  src={LogoImg}
                  alt='logo'/>
           </Navbar.Brand>
@@ -28,7 +31,7 @@ const NavbarComponent = () => {
                            className='justify-content-between'>
             <NavbarNav navigate={navigate}/>
             <NavbarUser navigate={navigate}
-                        isStretched={isStretched}/>
+                        isNavbarExpanded={isNavbarExpanded}/>
           </Navbar.Collapse>
         </Container>
       </Navbar>

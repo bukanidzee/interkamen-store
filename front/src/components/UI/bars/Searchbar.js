@@ -16,7 +16,7 @@ const SearchBar = ({changeSearchQuery}) => {
              className = 'search-input'
              value={inputValue}
              onChange={(event) => setInputValue(event.target.value)}
-             placeholder='Введите поисковый запрос'/>
+             placeholder='Введите запрос'/>
       <Button
         className = 'search-button'
         variant="outline-secondary"

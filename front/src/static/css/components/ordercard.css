@@ -19,6 +19,5 @@
 .order-card-active {
   background: #0d6efd;
   border-color: #0d6efd;
-  cursor: default;
-
+  /* cursor: default; */
 }

@@ -16,7 +16,7 @@ const OrderList = ({orders,
                      order={order}
                      number={index+1}
                      setChoosedOrder={setChoosedOrder}
-                     activeClassName={order.id===choosedOrder}/>
+                     choosedOrder={choosedOrder}/>
         </CSSTransition>
     )}
     </TransitionGroup>

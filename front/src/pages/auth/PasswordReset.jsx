@@ -5,6 +5,7 @@ import UserService from '../../API/UserService';
 import {useAPI} from '../../hooks/useAPI';
 import {regularFormSubmitAction} from '../../utils/forms/formSubmitAction';
 import RegularForm from '../../components/UI/forms/RegularForm';
+import CentrifyForm from '../../components/UI/forms/CentrifyForm';
 
 
 const PasswordReset = () => {
@@ -27,12 +28,14 @@ const PasswordReset = () => {
   )
 
   return(
-    <RegularForm header='Сброс пароля.'
-                 onSubmit={resetPassword}
-                 form={form}
-                 setField={setField}
-                 errors={errors}
-                 submitName='Сбросить пароль'/>
+    <CentrifyForm>
+      <RegularForm header='Сброс пароля.'
+                   onSubmit={resetPassword}
+                   form={form}
+                   setField={setField}
+                   errors={errors}
+                   submitName='Сбросить пароль'/>
+    </CentrifyForm>
   )
 }
 

@@ -14,9 +14,4 @@ const OneButtonOrGroup = ({withMargin, buttons}) =>
                     key={button.name}/>)}
   </div>
 
-
 export default OneButtonOrGroup;
-
-// <div className={classes.join(' ')}>
-//   {buttons}
-// </div>

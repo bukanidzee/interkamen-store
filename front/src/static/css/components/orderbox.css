@@ -1,0 +1,12 @@
+.order-box {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+.order-box.with-fixed-navbar {
+  top:100px;
+}
+
+.offcanvas-small *{
+  font-size: 0.75rem;
+}

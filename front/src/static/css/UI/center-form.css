@@ -1,0 +1,6 @@
+.center-form {
+  display: flex;
+  flex-direction: column;
+  min-height: inherit;
+  justify-content: center
+}

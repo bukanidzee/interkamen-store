@@ -3,7 +3,7 @@ import Loader from './Loader';
 const LoadingThenContent = ({...props}) =>
   <>
     {props.isLoading ?
-      <Loader fromTop='50'/>
+      <Loader fromTop='50%'/>
     :
       props.children
     }

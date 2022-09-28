@@ -11,7 +11,7 @@ import {useLogout} from '../../hooks/useLogout';
 import {useIsStaffAndFullname} from '../../hooks/useAuthData';
 import {useSelector} from 'react-redux';
 
-const NavbarUser = ({navigate, isStretched}) => {
+const NavbarUser = ({navigate, isNavbarExpanded}) => {
   const [is_staff, fullname] = useIsStaffAndFullname();
   const {items} = useSelector(state => state.currentOrder)
 
@@ -32,18 +32,20 @@ const NavbarUser = ({navigate, isStretched}) => {
                 Выйти
               </NavDropdown.Item>
             </NavDropdown>
+            <OrdersLink OrderComponent={isNavbarExpanded ? Button : Nav.Link}
+                        body={isNavbarExpanded ?
+                          <svg fill="currentColor" width={22} height={22}>
+                            <BasketIcon />
+                          </svg>
+                          :
+                          'Корзина' }
+                        is_staff={is_staff}
+                        items={items}
+                        navigate={navigate}/>
           </Nav>
-          <OrdersLink OrderComponent={isStretched ? Nav.Link : Button}
-                      body={isStretched ? 'Корзина' :
-                        <svg fill="currentColor" width={22} height={22}>
-                          <BasketIcon />
-                        </svg>}
-                      is_staff={is_staff}
-                      items={items}
-                      navigate={navigate}/>
         </> :
         <>
-        <UserEntryLink UserEntryComponent={isStretched ? Nav.Link : Button}
+        <UserEntryLink UserEntryComponent={isNavbarExpanded ? Button : Nav.Link}
                        navigate={navigate}/>
         </>
       }

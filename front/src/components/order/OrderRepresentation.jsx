@@ -4,10 +4,12 @@ import OrderService from '../../API/OrdersService';
 import UserService from '../../API/UserService';
 import {getPageCount} from '../../utils/pages';
 import {ordersCallback} from '../../utils/callbacks/ordersCallback';
-import {handleHeightChange} from '../../utils/scrolling';
 import {orderSortOptions} from '../../utils/buttons/orderSortOptions';
+import '../../static/css/components/filter.css'
+import classnames from 'classnames'
+import {useUserAgent} from '../../hooks/useUserAgent';
 
-import { useEffect, useState, useRef, useMemo, useCallback } from 'react';
+import { useEffect, useState, useMemo, useCallback } from 'react';
 import {useIsStaff} from '../../hooks/useAuthData';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -18,7 +20,7 @@ import SelectBar from '../UI/bars/SelectBar';
 import SearchBarWithOptions from '../UI/bars/SearchBarWithOptions';
 import LastElement from '../UI/universal/LastElement'
 import OrderList from './OrderList';
-import OrderDetail from './OrderDetail';
+import OrderDetailBox from './OrderDetaiBox';
 
 const OrderRepresentation = ({status}) => {
   const [page, setPage] = useState(1);
@@ -62,6 +64,9 @@ const OrderRepresentation = ({status}) => {
 
   useFirstLoadingCheck(callback, [filter, status]);
 
+  const {isTabsBig} = useUserAgent()
+
+
   useEffect(() => {
     getOrders()
   }, [page])
@@ -71,35 +76,21 @@ const OrderRepresentation = ({status}) => {
     return orderSortOptions(status)
   }, [status])
 
-  const orderBodyRef = useRef(null)
-
-  const changeHeightFunc = handleHeightChange(orderBodyRef)
-
-  useEffect(() => {
-    window.addEventListener('scroll', changeHeightFunc)
-    return () =>
-      window.removeEventListener('scroll', changeHeightFunc)
-  }, [])
-
   return(
-    <Container>
-      <Row>
-        <Col sm='auto'>
+    <Container fluid>
+      <div className={classnames('filter', {'compact': !isTabsBig})}>
           <SelectBar defaultValue='Сортировка по'
                      options = {sortOptions}
                      value = {filter.sort}
                      onChange = {(s) => setFilter({...filter, sort:s})}/>
-        </Col>
         {is_staff &&
-          <Col sm>
-          <SearchBarWithOptions searchQuery={filter.userId}
-                                setSearchQuery={v => setFilter({...filter,
-                                                                userId:v})}
-                                fetchFunc={UserService.getUsers}/>
-          </Col>}
-      </Row>
+            <SearchBarWithOptions searchQuery={filter.userId}
+                                  setSearchQuery={v => setFilter({...filter,
+                                                                  userId:v})}
+                                  fetchFunc={UserService.getUsers}/>}
+      </div>
       <Row>
-        <Col sm={true}>
+        <Col>
           <LoadingOrMessage condition={isOrdersReady && orders.length}
                             isLoading={isOrdersLoading}
                             message='Извините, заказы данного статуса не найдены'>
@@ -115,49 +106,19 @@ const OrderRepresentation = ({status}) => {
           </LoadingOrMessage>
 
         </Col>
-        {choosedOrder >=0 &&
-          <Col sm={7}>
-            <div ref={orderBodyRef}
-                 className='sticky-top'
-                 style={{overflowY:'auto',
-                         overflowX:'hidden'}}>
-              <OrderDetail orderId={choosedOrder}
-                           index={orders.indexOf(orders.find((el) => el.id===choosedOrder))}
-                           orders={orders}
-                           setOrders={setOrders}
-                           status={status}
-                           setChoosedOrder={setChoosedOrder}
-                           isChoosedLoading={isChoosedLoading}
-                           setIsChoosedLoading={setIsChoosedLoading}
-                           changeHeightFunc={changeHeightFunc}
-                           choosed={choosed}
-                           setChoosed={setChoosed}/>
-            </div>
-          </Col>
-        }
-      </Row>
-      <Row>
-
+        <OrderDetailBox orderId={choosedOrder}
+                        index={orders.indexOf(orders.find((el) => el.id===choosedOrder))}
+                        orders={orders}
+                        setOrders={setOrders}
+                        status={status}
+                        setChoosedOrder={setChoosedOrder}
+                        isChoosedLoading={isChoosedLoading}
+                        setIsChoosedLoading={setIsChoosedLoading}
+                        choosed={choosed}
+                        setChoosed={setChoosed}/>
       </Row>
     </Container>
   )
 }
 
 export default OrderRepresentation;
-
-// import Pagination from './UI/Pagination';
-// <Pagination totalPages={totalPages}
-//             totalCount={totalCount}
-//             limit={limit}
-//             setLimit={setLimit}
-//             page={page}
-//             setPage={setPage}/>
-
-// useEffect(() => {
-//   if (choosedOrder === -1) {
-//     handleOrdersParamsChange(page,
-//                              setPage,
-//                              isFirstLoading,
-//                              getOrders)
-//   }
-// }, [choosedOrder])

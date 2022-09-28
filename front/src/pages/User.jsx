@@ -8,6 +8,7 @@ import {twoStatesFormSubmitAction} from '../utils/forms/formSubmitAction';
 import {handleFormsErrors} from '../utils/errors/handleErrors';
 import ChangeForm from '../components/UI/forms/ChangeForm';
 import {useTwoStatesForm} from '../hooks/useForm';
+import CentrifyForm from '../components/UI/forms/CentrifyForm';
 
 
 const User = () => {
@@ -62,13 +63,15 @@ const User = () => {
   )
 
   return(
-    <ChangeForm header='Страница редактирования пользователя'
-                condition={userId}
-                isLoading={isLoading}
-                form={form}
-                onSubmit={patchUser}
-                setField={setField}
-                errors={errors}/>
+    <CentrifyForm>
+      <ChangeForm header='Страница редактирования пользователя'
+                  condition={userId}
+                  isLoading={isLoading}
+                  form={form}
+                  onSubmit={patchUser}
+                  setField={setField}
+                  errors={errors}/>
+    </CentrifyForm>
   )
 }
 

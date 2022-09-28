@@ -3,8 +3,12 @@ import Form from 'react-bootstrap/Form'
 // import Button from 'react-bootstrap/Button'
 import OneButtonOrGroup from '../buttons/OneButtonOrGroup';
 import {forwardRef, useMemo} from 'react'
+import {useUserAgent} from '../../../hooks/useUserAgent';
+import classnames from 'classnames';
 
 const TwoStatesFormItem = forwardRef((props, ref) => {
+  const {isProductCardMedium} = useUserAgent()
+
   const buttons = useMemo(() => {
     return props.field.state === 'notActive' ?
       [{name: 'Изменить',
@@ -25,7 +29,10 @@ const TwoStatesFormItem = forwardRef((props, ref) => {
   }, [props.field])
 
   return(
-    <div className='mb-2 w-50 mx-auto'>
+    <div className={classnames('my-3',
+                               {'w-50': isProductCardMedium},
+                               {'w-75': !isProductCardMedium},
+                               'mx-auto')}>
 
       <Form onSubmit={props.onSubmit}
             id={`form-${props.name}`}>
@@ -41,49 +48,11 @@ const TwoStatesFormItem = forwardRef((props, ref) => {
                   error={props.error}
                   disabled={props.field.state === 'notActive'}
                   {...(ref ? {ref:ref} : {})}/>
+        <OneButtonOrGroup buttons={buttons} withMargin/>
       </Form>
-      <OneButtonOrGroup buttons={buttons} withMargin/>
+
     </div>
   )
 })
 
 export default TwoStatesFormItem;
-
-// as={props.field.state === 'notActive' ? 'div': 'input' }
-// <Button variation='primary'
-//         type="button"
-//         onClick={() => {
-//           props.reverseFieldState(props.name)
-//           return false
-//         }}>
-//   Изменить
-// </Button>
-
-
-// {props.field.state === 'notActive' ?
-//    <div className='d-flex justify-content-end'>
-//      <button type="button"
-//              className="btn btn-primary"
-//              onClick={() => {
-//                props.setField(props.name, {state:'active'})
-//              }}>
-//        Изменить
-//      </button>
-//    </div>
-//  :
-//    <div className='d-flex justify-content-between'>
-//      <Button variation='primary'
-//              type="submit"
-//              form={`form-${props.name}`}>
-//        Подтвердить
-//      </Button>
-//      <Button variation='primary'
-//              type="button"
-//              onClick={() => {
-//                props.setField(props.name, {value:props.field.initialValue,
-//                                            state:'notActive'})
-//              }}>
-//        Отменить
-//      </Button>
-//    </div>
-// }
