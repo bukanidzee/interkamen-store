@@ -1,4 +1,4 @@
-import '../static/css/pages/contacts.css';
+import '../static/css/pages/contacts.scss';
 // import Container from 'react-bootstrap/Container';
 // import Row from 'react-bootstrap/Row';
 import Table from 'react-bootstrap/Table'

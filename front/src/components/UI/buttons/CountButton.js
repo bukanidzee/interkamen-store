@@ -1,4 +1,4 @@
-import '../../../static/css/UI/countbutton.css';
+import '../../../static/css/UI/countbutton.scss';
 // import {useState} from 'react';
 
 const CountButton = ({count, setCount}) => {

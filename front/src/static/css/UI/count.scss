@@ -4,8 +4,8 @@
   flex-grow: 1;
   width: 100%;
   align-items: center;
-}
 
-.count.spaceBetween {
-  justify-content: space-between;
+  &.spaceBetween {
+    justify-content: space-between;
+  }
 }

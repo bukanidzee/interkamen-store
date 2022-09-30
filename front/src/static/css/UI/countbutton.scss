@@ -1,0 +1,44 @@
+@mixin triangle($direction){
+  width: 0;
+  height: 0;
+  border-top: 15px solid transparent;
+  border-bottom: 15px solid transparent;
+  border-#{$direction}: 20px solid #0d6efd;
+  margin-#{$direction}: 5px;
+  transition: border-#{$direction}-color 0.2s ease-in-out;
+
+  &:hover {
+    cursor: pointer;
+    border-#{$direction}-color: #0b5ed7
+  }
+}
+
+.triangle-left {
+  @include triangle($direction: right)
+}
+
+.triangle-right {
+  @include triangle($direction: left)
+}
+
+.countbutton-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid gray;
+  border-radius: 5px;
+  height: 40px;
+  padding: 2px;
+  width: min-content;
+
+  input {
+    width: 40px;
+    text-align: center;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+  }
+}

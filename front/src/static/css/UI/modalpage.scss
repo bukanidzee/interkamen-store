@@ -7,11 +7,10 @@
   display: none;
   background: rgba(0, 0, 0, 0.5);
 
-}
-
-.Modal.active {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2000;
+  &.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+  }
 }

@@ -1,6 +1,6 @@
 import {getPagesArray, getLimitsArray} from '../../utils/pages';
 import {useMemo} from 'react'
-import '../../static/css/UI/pagination.css';
+import '../../static/css/UI/pagination.scss';
 
 const Pagination = ({totalPages, totalCount, limit, setLimit, page, setPage}) => {
   const pagesArray = useMemo(() => getPagesArray(totalPages), [totalPages]);

@@ -1,7 +1,7 @@
 import ProductItem from './ProductItem';
 import ProductItemInfo from './ProductItemInfo';
 import {TransitionGroup, CSSTransition} from "react-transition-group";
-import '../../static/css/components/productitemcard.css';
+import '../../static/css/components/productitemcard.scss';
 import {useDeleteChoosedArrayElement} from '../../hooks/useDeleteChoosedArrayElement';
 import {useUserAgent} from '../../hooks/useUserAgent';
 import classnames from 'classnames';

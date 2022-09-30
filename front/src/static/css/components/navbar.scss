@@ -1,12 +1,13 @@
-.navbar {
+#navbar {
   background-color: rgba(50, 50, 50, 0.2);
   width: 100%;
   position: absolute;
-}
-.navbar.fixed-position{
-  background-color: rgba(129,154,177);
-  position: fixed;
-  z-index: 2000;
+
+  &.fixed-position{
+    background-color: rgba(129,154,177);
+    position: fixed;
+    z-index: 2000;
+  }
 }
 .head-img {
   width: auto;

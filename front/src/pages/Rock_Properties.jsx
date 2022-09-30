@@ -1,4 +1,4 @@
-import '../static/css/pages/rock_properties.css';
+import '../static/css/pages/rock_properties.scss';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 

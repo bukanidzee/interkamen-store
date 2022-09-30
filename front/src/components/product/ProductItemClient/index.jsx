@@ -6,7 +6,7 @@ import CloseButton from 'react-bootstrap/CloseButton'
 import MediaQuery from 'react-responsive'
 import BigCount from './BigCount';
 import CompactCount from './CompactCount';
-import '../../../static/css/UI/count.css';
+import '../../../static/css/UI/count.scss';
 
 const ProductItemClient = ({product,
                             item,

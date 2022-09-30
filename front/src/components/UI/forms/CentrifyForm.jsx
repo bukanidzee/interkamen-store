@@ -1,4 +1,4 @@
-import '../../../static/css/UI/center-form.css';
+import '../../../static/css/UI/center-form.scss';
 
 const CentrifyForm = ({...props}) =>
   <div className='center-form'>

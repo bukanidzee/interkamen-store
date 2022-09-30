@@ -1,6 +1,6 @@
 import ActionButton from './ActionButton';
 import classnames from 'classnames'
-import '../../../static/css/UI/onebuttonorgroup.css'
+import '../../../static/css/UI/onebuttonorgroup.scss'
 
 const OneButtonOrGroup = ({withMargin, buttons}) =>
   <div className={classnames({'mt-4': withMargin},

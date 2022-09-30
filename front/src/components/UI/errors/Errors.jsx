@@ -3,7 +3,7 @@ import {useState, useEffect} from 'react';
 import ToastContainer from 'react-bootstrap/ToastContainer'
 import Toast from 'react-bootstrap/Toast'
 import {useAction} from '../../../hooks/useAction'
-import '../../../static/css/UI/errors.css';
+import '../../../static/css/UI/errors.scss';
 
 const Errors = () => {
   const errors = useSelector(state => state.errors)

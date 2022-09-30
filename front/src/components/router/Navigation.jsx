@@ -25,8 +25,8 @@ const Navigation = () => {
             </Col>
           </MediaQuery>
           <Col>
-            <div className={classnames('content-box',
-                                       {'small-text':!isProductCardSmall})}
+            <div id='content-box' className={classnames({
+                                              'small-text':!isProductCardSmall})}
                  style={{marginTop: topContextMargin,
                          minHeight: `calc(95vh - ${topContextMargin}px)`}}>
                 <Outlet />

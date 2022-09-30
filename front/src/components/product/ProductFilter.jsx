@@ -1,6 +1,6 @@
 import SelectBar from '../UI/bars/SelectBar';
 import SearchBar from '../UI/bars/Searchbar';
-import '../../static/css/components/filter.css';
+import '../../static/css/components/filter.scss';
 
 const ProductFilter = ({productFilter, setProductFilter}) => {
 

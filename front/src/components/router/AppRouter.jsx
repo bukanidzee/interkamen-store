@@ -3,7 +3,7 @@ import { useIsStaffAndFullname } from '../../hooks/useAuthData';
 import LoadingGroupTransition from '../UI/loading/LoadingGroupTransition';
 
 
-import '../../static/css/appcontent.css';
+import '../../static/css/appcontent.scss';
 import { routes } from '../../navigation/routes';
 
 const AppRouter = () => {

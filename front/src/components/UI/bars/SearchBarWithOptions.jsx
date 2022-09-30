@@ -4,7 +4,7 @@ import {useFirstLoadingCheck} from '../../../hooks/useFirstLoadingCheck';
 import {makeSearchDelay} from '../../../utils/makeSearchDelay';
 import {getReadableSelectOption} from '../../../utils/readable/readableSelectOption'
 import {searchBarCallback} from '../../../utils/callbacks/searchBarCallback';
-import '../../../static/css/UI/searchbar.css';
+import '../../../static/css/UI/searchbar.scss';
 
 const SearchBarWithOptions = ({searchQuery, setSearchQuery, fetchFunc}) => {
   const [inputValue, setInputValue] = useState('');

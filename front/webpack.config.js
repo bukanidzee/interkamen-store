@@ -7,7 +7,6 @@ const webpack = require('webpack')
 
 let isProduction = process.env.NODE_ENV === 'production'
 
-console.log(isProduction)
 
 const plugins = [
   new CleanWebpackPlugin(),
@@ -22,18 +21,11 @@ const plugins = [
   new webpack.ProvidePlugin({
     process: 'process/browser',
   }),
-  // new webpack.DefinePlugin({
-  //   'process.env': {
-  //     REACT_APP_API_ORIGIN: JSON.stringify(process.env.REACT_APP_API_ORIGIN)
-  //   }
-  // }),
   new webpack.EnvironmentPlugin(['REACT_APP_API_ORIGIN']),
   new webpack.SourceMapDevToolPlugin({
     filename: "[file].map"
   }),
 ]
-
-// let target = 'web'
 
 if (process.env.SERVE) { // Используем плагин только если запускаем devServer
   plugins.push(new ReactRefreshWebpackPlugin());
@@ -41,7 +33,6 @@ if (process.env.SERVE) { // Используем плагин только ес�
 
 module.exports = {
   mode: isProduction ? 'production' : 'development',
-  // target: target,
   entry: {front: path.resolve(__dirname, "./src/index.js")},
   output: {
     filename: isProduction ? '[name].[contenthash].js' : '[name].js',
@@ -52,7 +43,7 @@ module.exports = {
   },
   plugins: plugins,
   resolve: {
-    extensions: ['*', '.js', '.jsx'],
+    extensions: ['*', '.js', '.jsx', '.scss'],
     alias: {
       'react-virtualized/List': 'react-virtualized-reactv17/dist/es/List',
       'react-virtualized/styles.css': 'react-virtualized-reactv17/styles.css'
@@ -76,18 +67,31 @@ module.exports = {
         }
       },
       {
-        test: /\.css$/i,
+        test: /\.s?css$/i,
         use: [isProduction ?
                 MiniCssExtractPlugin.loader :
                 'style-loader',
-              {
-                loader: 'css-loader',
+              {loader: 'css-loader',
                 options: {
                   // modules: true,
                   sourceMap: !isProduction
                 }
               },
-              // 'postcss-loader'
+              {
+                loader: "postcss-loader",
+                options: {
+                  sourceMap: !isProduction,
+                  postcssOptions: {
+                    config: path.resolve(__dirname, "src/static/css/postcss.config.js"),
+                  },
+                },
+              },
+              {loader: 'sass-loader',
+                options: {
+                  // modules: true,
+                  sourceMap: !isProduction
+                }
+              }
             ]
       },
       {
@@ -98,7 +102,7 @@ module.exports = {
         parser: { dataUrlCondition: { maxSize: 15000 } },
       },
       {
-        test: /\.(js)$/,
+        test: /\.jsx?$/,
         enforce: 'pre',
         use: ['source-map-loader'],
       },

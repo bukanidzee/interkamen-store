@@ -1,10 +1,10 @@
 import React from 'react';
-import '../../static/css/components/sidebar.css';
+import '../../static/css/components/sidebar.scss';
 import {Link} from 'react-router-dom';
 import {navLinks} from '../../navigation/navLinks';
 
 const Sidebar = () =>
-  <div className='aside'>
+  <div id='aside'>
     {navLinks.map((bar) =>
       <div key={bar.title}>
         {bar.title}

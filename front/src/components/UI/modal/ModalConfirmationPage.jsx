@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo, useCallback} from 'react';
 import ModalPage from './ModalPage';
 // import Button from 'react-bootstrap/Button'
 import OneButtonOrGroup from '../buttons/OneButtonOrGroup';
-import '../../../static/css/UI/modalconfirmationcontent.css';
+import '../../../static/css/UI/modalconfirmationcontent.scss';
 
 const ModalConfirmationPage = ({action,
                                 actionData,

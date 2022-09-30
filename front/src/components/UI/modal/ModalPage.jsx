@@ -1,4 +1,4 @@
-import '../../../static/css/UI/modalpage.css';
+import '../../../static/css/UI/modalpage.scss';
 
 const ModalPage = ({classes, ...props}) => {
 

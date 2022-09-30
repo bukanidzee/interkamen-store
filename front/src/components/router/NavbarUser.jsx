@@ -1,6 +1,6 @@
 import React from 'react';
 import Button from 'react-bootstrap/Button';
-import '../../static/css/components/navbar.css';
+import '../../static/css/components/navbar.scss';
 import BasketIcon from '../../static/images/basket.svg';
 import Nav from 'react-bootstrap/Nav';
 import NavDropdown from 'react-bootstrap/NavDropdown';

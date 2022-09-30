@@ -1,6 +1,6 @@
 import {useState, useCallback} from 'react';
 import Button from 'react-bootstrap/Button';
-import '../../../static/css/UI/searchbar.css';
+import '../../../static/css/UI/searchbar.scss';
 
 const SearchBar = ({changeSearchQuery}) => {
   const [inputValue, setInputValue] = useState('');

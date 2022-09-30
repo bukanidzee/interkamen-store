@@ -5,7 +5,7 @@ import UserService from '../../API/UserService';
 import {getPageCount} from '../../utils/pages';
 import {ordersCallback} from '../../utils/callbacks/ordersCallback';
 import {orderSortOptions} from '../../utils/buttons/orderSortOptions';
-import '../../static/css/components/filter.css'
+import '../../static/css/components/filter.scss'
 import classnames from 'classnames'
 import {useUserAgent} from '../../hooks/useUserAgent';
 

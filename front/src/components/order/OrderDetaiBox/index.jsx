@@ -2,7 +2,7 @@ import ColBox from './ColBox'
 import OffcanvasBox from './OffcanvasBox';
 import {useUserAgent} from '../../../hooks/useUserAgent';
 import MediaQuery from 'react-responsive';
-import '../../../static/css/components/orderbox.css';
+import '../../../static/css/components/orderbox.scss';
 
 const OrderDetailBox = ({orderId,
                          index,

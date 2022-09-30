@@ -1,4 +1,4 @@
-import '../../static/css/components/ordercard.css';
+import '../../static/css/components/ordercard.scss';
 import { useMemo} from 'react';
 import {useIsStaff} from '../../hooks/useAuthData';
 import { get_readable_date } from '../../utils/readable/readable_date';

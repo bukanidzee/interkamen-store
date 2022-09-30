@@ -1,5 +1,5 @@
 import {useNavigate} from 'react-router-dom';
-import '../../static/css/components/navbar.css';
+import '../../static/css/components/navbar.scss';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import NavbarNav from './NavbarNav';
@@ -15,8 +15,8 @@ const NavbarComponent = () => {
            isBigHeadImg} = useUserAgent();
 
     return(
-      <Navbar className={classnames('navbar',
-                                    {'fixed-position': !isSidebarVisible})}
+      <Navbar id='navbar'
+              className={classnames({'fixed-position': !isSidebarVisible})}
               collapseOnSelect
               expand="lg">
         <Container fluid>

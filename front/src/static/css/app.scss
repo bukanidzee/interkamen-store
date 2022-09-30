@@ -12,7 +12,12 @@ body {
   background-size: cover;
   overflow: auto;
 }
-.content-box {
+
+@mixin little-size($size: 0.8em) {
+  font-size: $size
+}
+
+#content-box {
   position:relative;
   padding: 10px 10px 10px;
   background: #f8f9fa;
@@ -23,10 +28,16 @@ body {
   border-style: solid;
   height: auto;
   hyphens: auto;
-}
 
-.content-box.small-text,
-.content-box.small-text button,
-.content-box.small-text input{
-  font-size: 0.75em;
+  &.small-text{
+    @include little-size($size: 0.85rem)
+  }
+
+  &.small-text input{
+    @include little-size
+  }
+
+  &.small-text button {
+    @include little-size($size: 0.85em)
+  }
 }

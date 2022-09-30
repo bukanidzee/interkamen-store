@@ -17,10 +17,10 @@
   background-color: inherit;
   outline: none;
   padding-right: 5px;
-}
 
-.number:active:hover {
-  animation: changePresense 0.5s ease-out ;
+  &:active:hover {
+    animation: changePresense 0.5s ease-out ;
+  }
 }
 
 @keyframes changePresense {
