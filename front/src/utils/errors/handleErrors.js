@@ -2,7 +2,7 @@
 import {deleteAuthData} from '../authData';
 import {formErrors} from './formErrors';
 
-function deleteAuthCredentials(err, setOrder, logout) {
+function deleteAuthCredentials(err, setOrder, logout, appendError) {
   if (err.response?.data?.detail === 'Invalid token.' ||
       err.response?.data?.detail === 'Недопустимый токен.') {
     deleteAuthData(setOrder, logout)
@@ -12,7 +12,7 @@ function deleteAuthCredentials(err, setOrder, logout) {
 
 export function handleFetchErrors (err, appendError, setOrder, logout) {
   if (err.response) {
-    deleteAuthCredentials(err, setOrder, logout)
+    deleteAuthCredentials(err, setOrder, logout, appendError)
     if (err.response.status >= 500) {
       appendError(`Произошла ошибка ${err.response.status}, произошла внутренняя ошибка сервера!`)
     } else if (err.response.status === 400){
