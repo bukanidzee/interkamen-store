@@ -6,7 +6,7 @@ import AddButton from './AddButton';
 const BigCount = ({count, setCount, productPrize, place, fetchItem}) => {
   return (
     <>
-      <Col sm={true}>
+      <Col>
         <div className='count'>
           <CountAndPrize count={count}
                          setCount={setCount}

@@ -6,7 +6,6 @@ import {useAction} from '../../hooks/useAction'
 import RegularForm from '../../components/UI/forms/RegularForm';
 import CentrifyForm from '../../components/UI/forms/CentrifyForm';
 import {Link} from 'react-router-dom';
-import {useCallback} from 'react'
 
 import {useForm} from '../../hooks/useForm'
 
@@ -17,7 +16,7 @@ const Login = () => {
                                                        'password'])
 
 
-  const fetch = useCallback(async () => {
+  const fetch = async () => {
     await UserService.login(
       form,
       async (response) => {
@@ -25,7 +24,7 @@ const Login = () => {
         await getCurrentOrder(response.is_staff,
                               setOrder)
       })
-  }, [form])
+  }
 
   const handleErrors = () => {
     setErrors({...errors, username:'Неверные логин или пароль'})

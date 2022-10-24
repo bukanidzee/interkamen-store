@@ -1,43 +1,74 @@
+@use 'utils/volume' as volume;
+@use 'utils/scrollbar' as scrollbar;
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    --bs-main-background-color: #f8f9fa;
+    --bs-choose-color: #0a58ca;
+    --bs-attention-color: #0d6efd;
+
+
 }
 
 body {
-  background-image: url('../images/background.jpg');
-  background-position: center center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: cover;
-  overflow: auto;
+
+  @include scrollbar.initial-scrollbar();
+  background: {
+    image: url('../images/background.jpg');
+    position: center center;
+    repeat: no-repeat;
+    attachment: fixed;
+    size: cover
+  }
+  overflow-y: auto;
+  overflow-x: hidden;
+
+
+
+  // scrollbar-color: var(--bs-attention-color) rgba(#fff, 0.5);
+  // scrollbar-width: thin;
+  // scrollbar-gutter: stable;
+  //
+  // &::-webkit-scrollbar {
+  //   width: 15px;
+  // }
+  //
+  // &::-webkit-scrollbar-track {
+  //   background-color: #e0e0e0;
+  //   border-radius: 100px;
+  // }
+  //
+  // &::-webkit-scrollbar-thumb {
+  //   box-shadow: inset 2px 2px 5px rgba(#fff, 0.5);
+  //   background-color: var(--bs-attention-color);
+  //   border-radius: 100px;
+  //
+  // }
 }
 
-@mixin little-size($size: 0.8em) {
+@mixin little-size($size) {
   font-size: $size
 }
 
 #content-box {
+  @include volume.volume-box(4px);
   position:relative;
   padding: 10px 10px 10px;
-  background: #f8f9fa;
+  font-family: 'Roboto', sans-serif;
+  font-size: 17px;
+  background: var(--bs-main-background-color);
   opacity: 0.9;
-  border-width: 0px;
-  border-radius: 5px;
-  border-color: #B6B6B6;
-  border-style: solid;
   height: auto;
   hyphens: auto;
 
-  &.small-text{
+  &.small-text, &.small-text button{
     @include little-size($size: 0.85rem)
   }
 
   &.small-text input{
-    @include little-size
-  }
-
-  &.small-text button {
-    @include little-size($size: 0.85em)
+    @include little-size($size: 0.8rem)
   }
 }

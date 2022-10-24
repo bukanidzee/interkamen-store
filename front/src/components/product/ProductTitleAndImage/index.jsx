@@ -1,33 +1,19 @@
-import MediaQuery from 'react-responsive'
-import {useUserAgent} from '../../../hooks/useUserAgent';
-import CompactVariant from './CompactVariant';
-import BigVariant from './BigVariant';
+import Col from 'react-bootstrap/Col';
+import Content from './content';
 
-const ProductTitleAndImage = ({product, index, isLarge, multipleItems}) => {
-  const {productCardMedium, productCardMultiple} = useUserAgent()
-
+const ProductTitleAndImage = ({product, isLarge, index, isGrid}) => {
   return(
     <>
-      {multipleItems &&
-        <MediaQuery minWidth={productCardMultiple} >
-          <CompactVariant product={product}
-                          isLarge={isLarge}
-                          index={index}/>
-        </MediaQuery>}
-      <MediaQuery minWidth={productCardMedium}
-                  {...(multipleItems ?
-                    {maxWidth:productCardMultiple-1}
-                   :
-                    {})}>
-        <BigVariant product={product}
-                    isLarge={isLarge}
-                    index={index}/>
-      </MediaQuery>
-      <MediaQuery maxWidth={productCardMedium-1}>
-        <CompactVariant product={product}
-                        isLarge={isLarge}
-                        index={index}/>
-      </MediaQuery>
+      {!isGrid ?
+        <Col sm={isLarge ? 5 : 4}
+             key={`${product.id}`}
+             className='d-flex flex-column'>
+          <Content index={index} product={product} />
+        </Col> :
+        <div key={`${product.id}`}
+             className='d-flex flex-column'>
+          <Content index={index} product={product} />
+        </div>}
     </>
   )
 }

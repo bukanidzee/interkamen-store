@@ -1,13 +1,10 @@
 import Row from 'react-bootstrap/Row';
-import Col from 'react-bootstrap/Col';
-import {useMemo, useState, useCallback} from 'react';
+import {useState} from 'react';
 import {useNavigate} from 'react-router-dom';
 import '../../../static/css/UI/count.scss';
 
 import {useFetchItem} from '../../../hooks/useFetchItem';
 import {useFirstLoadingCheck} from '../../../hooks/useFirstLoadingCheck';
-import CountAndPrize from '../../UI/buttons/CountAndPrize';
-import OneButtonOrGroup from '../../UI/buttons/OneButtonOrGroup';
 import BigCount from './BigCount';
 import CompactCount from './CompactCount'
 import MediaQuery from 'react-responsive';
@@ -27,9 +24,9 @@ const ProductDescClient = ({product,
     'deleteItem': () => navigate('/orders')
   }
 
-  const fetchCallback = useCallback((action) => {
+  const fetchCallback = (action) => {
     fetchCallbackActions[action]()
-  })
+  }
 
   const fetchItem = useFetchItem(product,
                                  count,
@@ -37,22 +34,20 @@ const ProductDescClient = ({product,
                                  index,
                                  fetchCallback)
 
-  const callback = useCallback(async () => {
+  const callback = async () => {
     if (item) {
       await fetchItem('changeItem');
     }
-  }, [item, count])
+  }
 
   useFirstLoadingCheck(callback, [count])
 
-  const buttons = useMemo(() => {
-    return item ?
+  const buttons = item ?
       [{action: async () => await fetchItem('deleteItem'),
         name: 'Удалить продукт'}]
     :
       [{action: async () => await fetchItem('addItem'),
         name: 'Добавить продукт'}]
-  }, [item])
 
   return(
     <Row>

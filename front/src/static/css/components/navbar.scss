@@ -1,7 +1,7 @@
 #navbar {
   background-color: rgba(50, 50, 50, 0.2);
   width: 100%;
-  position: absolute;
+  // position: relative;
 
   &.fixed-position{
     background-color: rgba(129,154,177);
@@ -11,6 +11,11 @@
 }
 .head-img {
   width: auto;
+}
+
+.navbar-set > *:nth-child(n+1),
+.navbar-nav > *:nth-child(n+1){
+  margin-left: 15px
 }
 /* .navbar-set {
   display: flex;

@@ -1,0 +1,9 @@
+@use '../utils/infobox' as infobox;
+
+.info {
+  @include infobox.info-box(white, var(--bs-attention-color));
+
+  .d-flex & {
+    width: auto;
+  }
+}

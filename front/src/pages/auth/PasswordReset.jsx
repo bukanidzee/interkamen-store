@@ -1,5 +1,4 @@
 import {useNavigate} from 'react-router-dom';
-import {useCallback} from 'react'
 import {useForm} from '../../hooks/useForm';
 import UserService from '../../API/UserService';
 import {useAPI} from '../../hooks/useAPI';
@@ -11,13 +10,13 @@ import CentrifyForm from '../../components/UI/forms/CentrifyForm';
 const PasswordReset = () => {
   const navigate = useNavigate()
   const [form, errors, setErrors, setField] = useForm(['email'])
-  const fetch = useCallback(async () => {
+  const fetch = async () => {
     await UserService.resetPassword(
       form,
       async () => {
         navigate('/password/reset/success')
       })
-  }, [form])
+  }
 
   const handleErrors = (err) => {
     setErrors({...errors, email:err.response.data.detail})

@@ -1,9 +1,9 @@
-import {useRef, useEffect, useCallback} from 'react';
+import {useRef, useEffect} from 'react';
 import {getExpectedCount} from '../utils/expectedCount';
 
 const useObserver = (canLoad, callback, canSetObserver) => {
   const observer = useRef()
-  const handleObserver = useCallback((ownRef) => {
+  const handleObserver = (ownRef) => {
     if (observer.current) observer.current.disconnect();
     function makeCallback(entries) {
       if (entries[0].isIntersecting && canLoad) {
@@ -14,7 +14,7 @@ const useObserver = (canLoad, callback, canSetObserver) => {
       observer.current = new IntersectionObserver(makeCallback);
       observer.current.observe(ownRef.current);
     }
-  }, [observer, canLoad, callback, canSetObserver])
+  }
   return handleObserver;
 }
 
@@ -28,7 +28,7 @@ export const useLastElementRef = (page,
 
   const handleObserver = useObserver(page<totalPages, () => {
     setPage(page + 1);
-  }, array.length <= getExpectedCount(totalCount, page, 10))
+  }, array.length <= getExpectedCount(totalCount, page, 12))
 
   useEffect(() => {
     for (let condition of listOfConditions){

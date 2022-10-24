@@ -24,7 +24,7 @@ const Errors = () => {
                  bg='danger'
                  onClose={() => deleteError(index)}
                  show={true}
-                 delay={30000}
+                 delay={5000}
                  autohide
                  style={{pointerEvents: 'auto'}}>
             <Toast.Header>

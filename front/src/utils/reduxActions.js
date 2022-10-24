@@ -3,7 +3,7 @@ import * as errorsReducers from '../redux_config/errors';
 import * as loadingReducers from '../redux_config/loading';
 import * as userReducers from '../redux_config/user';
 
-let actionsCreators = {}
+const actionsCreators = {}
 
 for (let reducers of [currentOrderReducers,
                       errorsReducers,

@@ -1,12 +1,13 @@
 import Col from 'react-bootstrap/Col';
 import ProductDescStaff from '../ProductDescStaff';
+import Price from '../../UI/universal/Price';
 
 
 const BigActions = ({product, index, deleteChoosedProduct, status}) => {
   return (
     <>
       <Col sm={'auto'}>
-        Цена: {product.prize} руб.
+        <Price price={product.prize}/>
       </Col>
       <Col sm>
         <ProductDescStaff productId={product.id}

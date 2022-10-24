@@ -11,7 +11,7 @@ const OrderList = ({orders,
         <CSSTransition
                     key={index}
                     timeout={500}
-                    classNames="product_item_card">
+                    classNames="product-item-card">
           <OrderCard
                      order={order}
                      number={index+1}

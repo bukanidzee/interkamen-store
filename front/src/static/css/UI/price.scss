@@ -1,0 +1,7 @@
+@use '../utils/infobox' as infobox;
+@use '../utils/oneliner' as oneliner;
+
+.price {
+  @include oneliner.one-liner();
+  @include infobox.info-box(white, #bdb5b5);
+}

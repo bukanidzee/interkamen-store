@@ -1,6 +1,6 @@
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
-import {useIsStaff} from '../../hooks/useAuthData';
+import {useSelector} from 'react-redux';
 import ProductDescClient from './ProductDescClient'
 import ProductDescStaff from './ProductDescStaff'
 
@@ -8,7 +8,7 @@ const ProductDescAndControl = ({product,
                                 item,
                                 productId,
                                 index}) => {
-  const is_staff = useIsStaff()
+  const is_staff = useSelector(state => state.auth.is_staff)
   return(
     <Container>
       <Row>

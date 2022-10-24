@@ -1,0 +1,82 @@
+@use '../utils/oneliner';
+
+%floating-placeholder {
+  top:-0.85em;
+	font-size:0.75em;
+}
+
+.fancy-input {
+  position: relative;
+  flex-grow: 1;
+  display: flex;
+  width: 100%;
+  min-height: 2em;
+  z-index: 2000;
+
+  & input {
+    width: 100%;
+    border: 0;
+    padding-left: 0.75em;
+    border-bottom: 1px solid black;
+    background: transparent;
+    transition: all 0.4s ease-in-out;
+
+    &.filled ~ label {
+      @extend %floating-placeholder;
+    }
+
+    &:focus {
+      outline: 0;
+      border: 0;
+      border-bottom: 1px solid var(--bs-choose-color);
+
+      & ~ label{
+        @extend %floating-placeholder;
+      }
+
+      & ~ datalist:has(option){
+        max-height: 10rem;
+        padding: 10px;
+        border-color: var(--bs-choose-color);
+      }
+    }
+  }
+
+  & label {
+    @include oneliner.one-liner();
+    position: absolute;
+    left: 0.75em;
+    top: 20%;
+    pointer-events:none;
+	  transition: all 0.4s ease-in-out;
+  }
+
+  & datalist {
+    display: block;
+    padding: 0px 10px;
+    transition: max-height 0.2s ease-in, padding 0.2s ease-in, border-color 0.2s ease-in;
+    border: 1px solid transparent;
+    border-radius: 0 0 5px 5px;
+    border-top: none;
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    transform: translateY(100%);
+    background-color: white;
+    width: inherit;
+    max-height: 0px;
+    overflow-y: auto
+  }
+
+  & option {
+    background-color: white;
+    padding: 4px;
+    margin-bottom: 1px;
+    cursor: pointer;
+
+    &:hover{
+      background-color: var(--bs-choose-color);
+      color: white;
+    }
+  }
+}

@@ -10,8 +10,7 @@ const CustomNavigate = ({to, replace, state}) => {
   useEffect(() => {
     if (isFirstLoading.current){
       isFirstLoading.current = false
-      navigate(to, { replace: replace,
-                     state: state});
+      navigate(to, { replace, state});
     }
   });
 

@@ -1,18 +1,16 @@
-import Col from 'react-bootstrap/Col';
 import ProductDescStaff from '../ProductDescStaff';
+import Price from '../../UI/universal/Price';
 
 
 const CompactActions = ({product, index, deleteChoosedProduct, status}) => {
   return (
-    <Col sm className='d-flex flex-column justify-content-around align-items-center'>
-      <div>
-        Цена: {product.prize} руб.
-      </div>
+    <>
+      <Price price={product.prize}/>
       <ProductDescStaff productId={product.id}
                         index={index}
                         deleteChoosedProduct={deleteChoosedProduct}
                         status={status}/>
-    </Col>
+    </>
   )
 }
 

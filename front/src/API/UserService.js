@@ -55,7 +55,7 @@ export default class UserService {
     const reqUrl = getUrl(`customuser/${id}/`)
     await handleRequest({
       method: 'patch',
-      url: getUrl(reqUrl),
+      url: reqUrl,
       data: data
     }, callback)
   }

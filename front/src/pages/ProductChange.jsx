@@ -1,9 +1,9 @@
 import {useAPI} from '../hooks/useAPI';
 import {useParams} from 'react-router-dom'
-import {useRef, useCallback} from 'react';
+import {useRef} from 'react';
 import {useDownloadInitial} from '../hooks/useDownloadInitial';
 import ProductService from '../API/ProductService';
-import {twoStatesFormSubmitAction} from '../utils/forms/formSubmitAction';
+import {regularFormSubmitAction} from '../utils/forms/formSubmitAction';
 import {handleFormsErrors} from '../utils/errors/handleErrors';
 import ChangeForm from '../components/UI/forms/ChangeForm';
 import CentrifyForm from '../components/UI/forms/CentrifyForm';
@@ -18,7 +18,7 @@ const ProductChange = () => {
                   'description',
                   'image']
   const [form,
-         setForm,
+         setEntireForm,
          errors,
          setErrors,
          setField,
@@ -26,41 +26,31 @@ const ProductChange = () => {
          setIsLoading] = useTwoStatesForm(fields)
 
   const imageRef = useRef()
-  const getInitialProduct = useCallback(async () => {
+  const getInitialProduct = async () => {
     await ProductService.get_product(
       productId,
-      (response) => {
-        let newForm = {...form}
-        for (let field of fields) {
-          newForm[field].value = response[field]
-          newForm[field].initialValue = response[field]
-        }
-        setForm(newForm)
-      }
+      setEntireForm
     )
-  }, [productId, form])
+  }
 
   useDownloadInitial(getInitialProduct, productId, setIsLoading)
 
-  const fetchChanges = useCallback(async (field) => {
-    const formdata = createFormData({[field]: form[field].value},
+  const fetchChanges = async () => {
+    const formdata = createFormData(form,
                                     {'image':imageRef})
     await ProductService.patch_product(
       productId,
       formdata,
-      (response) => {
-        setField(field, {state:'notActive',
-                         initialValue:response[field],
-                         value:response[field]})
-      })
-  }, [form])
+      setEntireForm
+    )
+  }
 
   const handleErrors = (err, field) => {
     handleFormsErrors(err, setErrors, field)
   }
 
-  const patchProduct = useAPI(
-    twoStatesFormSubmitAction(form, fetchChanges, setErrors, handleErrors)
+  const updateProduct = useAPI(
+    regularFormSubmitAction(form, fetchChanges, setErrors, handleErrors)
   )
 
   return(
@@ -69,7 +59,7 @@ const ProductChange = () => {
                   condition={productId}
                   isLoading={isLoading}
                   form={form}
-                  onSubmit={patchProduct}
+                  onSubmit={updateProduct}
                   setField={setField}
                   errors={errors}
                   ref={imageRef}/>

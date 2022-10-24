@@ -1,19 +1,22 @@
 .page-header {
   text-align: center;
   width: 100%;
+  font-weight: bolder;
+  color: transparent;
+  background-clip: text;
+  background-image: linear-gradient(90deg, #0d6efd 25%, black);
   margin-bottom: 20px;
 }
 .main-text {
-  font-style: normal;
   text-align: justify;
   text-indent: 30px;
-  float:left;
   width: 100%;
 }
 .in-box-image {
-  max-height: 300px;
+  // max-height: 300px;
   object-fit: scale-down;
-  width: 100%
+  width: 100%;
+  box-shadow: 0 0 8px 8px var(--bs-main-background-color) inset;
 }
 
 .auth-forms {

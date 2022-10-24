@@ -7,7 +7,7 @@ import {handleFormsErrors} from '../utils/errors/handleErrors';
 import {regularFormSubmitAction} from '../utils/forms/formSubmitAction';
 import {createFormData} from '../utils/forms/createFormData';
 import {useAPI} from '../hooks/useAPI';
-import {useRef, useCallback} from 'react';
+import {useRef} from 'react';
 
 const ProductCreate = () => {
   const [form, errors, setErrors, setField] = useForm(['title',
@@ -16,14 +16,14 @@ const ProductCreate = () => {
                                                        'image'])
   const navigate = useNavigate()
   const imageRef = useRef()
-  const fetch = useCallback(async () => {
+  const fetch = async () => {
     const formdata = createFormData(form, {'image':imageRef})
     await ProductService.create_product(
       formdata,
       () => {
         navigate(-1)
       })
-  }, [form])
+  }
 
   const handleErrors = (err) => {
     handleFormsErrors(err, setErrors, 'description')
@@ -32,6 +32,7 @@ const ProductCreate = () => {
   const createProduct = useAPI(
     regularFormSubmitAction(form, fetch, setErrors, handleErrors)
   )
+
   return(
     <CentrifyForm>
       <RegularForm header='Создать продукт'

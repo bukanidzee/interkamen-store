@@ -1,5 +1,4 @@
 import {useForm} from '../../hooks/useForm';
-import {useCallback} from 'react'
 
 import RegularForm from '../../components/UI/forms/RegularForm';
 import CentrifyForm from '../../components/UI/forms/CentrifyForm';
@@ -19,7 +18,7 @@ const Registration = () => {
                                                        'last_name',
                                                        'third_name',
                                                        'email'])
-  const fetch = useCallback(async () => {
+  const fetch = async () => {
     await UserService.registration(
       form,
       async (response) => {
@@ -27,11 +26,11 @@ const Registration = () => {
         await getCurrentOrder(response.is_staff,
                               setOrder)
       })
-  }, [form])
+  }
 
-  const handleErrors = useCallback((err) => {
+  const handleErrors = (err) => {
     handleFormsErrors(err, setErrors, 'password2')
-  }, [])
+  }
 
   const getUserKey = useAPI(
     regularFormSubmitAction(form, fetch, setErrors, handleErrors)

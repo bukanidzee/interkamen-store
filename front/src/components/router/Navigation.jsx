@@ -9,8 +9,12 @@ import {useUserAgent} from '../../hooks/useUserAgent';
 import classnames from 'classnames';
 
 const Navigation = () => {
-  const {isBigHeadImg, sidebarVisible, isProductCardSmall} = useUserAgent()
-  const topContextMargin = isBigHeadImg ? 150 : 125
+  const {isBigHeadImg,
+         sidebarVisible,
+         isSidebarVisible,
+         isProductCardSmall} = useUserAgent()
+  const topContentMargin = isSidebarVisible ? 50 : isBigHeadImg ? 150 : 125
+  const fromContentToTop = isSidebarVisible ? 150 : topContentMargin
 
   return(
     <div style={{width: '100%'}}>
@@ -19,16 +23,21 @@ const Navigation = () => {
         <Row>
           <MediaQuery minWidth={sidebarVisible}>
             <Col xl='auto'>
-              <div className="sticky-top" style={{zIndex:0}}>
+              <div className="sticky-top"
+                   style={{  display: 'flex',
+                             flexDirection: 'column',
+                             justifyContent: 'flex-end',
+                             height: `60vh`,
+                             zIndex: 500,}}>
                 <Sidebar />
               </div>
             </Col>
           </MediaQuery>
-          <Col>
+          <Col style={{zIndex:1000}}>
             <div id='content-box' className={classnames({
                                               'small-text':!isProductCardSmall})}
-                 style={{marginTop: topContextMargin,
-                         minHeight: `calc(95vh - ${topContextMargin}px)`}}>
+                 style={{marginTop: topContentMargin,
+                         minHeight: `calc(95vh - ${fromContentToTop}px)`}}>
                 <Outlet />
             </div>
           </Col>

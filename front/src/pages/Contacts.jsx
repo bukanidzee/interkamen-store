@@ -10,9 +10,9 @@ const Contacts = () =>
         <div className='main-text'>
           В состав ЗАО Интеркамень входят:
           <ol className='spisok'>
-            <li className='element'>Офис</li>
-            <li className='element'><Link to='career'>Карьер</Link></li>
-            <li className='element'><a href='#'>Цех</a></li>
+            <li>Офис</li>
+            <li><Link to='career'>Карьер</Link></li>
+            <li><a href='#'>Цех</a></li>
           </ol>
         </div>
         <Table striped hover bordered>

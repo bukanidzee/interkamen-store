@@ -1,13 +1,8 @@
 .search-bar {
+  position: relative;
   flex-grow: 1;
   display: flex;
   justify-content: space-between;
-}
-
-.search-input {
-  width: 100%;
-  margin-left: 10px;
-  flex-grow: 1;
 }
 
 .search-button {

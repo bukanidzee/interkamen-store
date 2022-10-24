@@ -4,6 +4,8 @@ import ModalConfirmationPage from '../UI/modal/ModalConfirmationPage';
 import ProductItemsList from '../product/ProductItemsList';
 import { get_readable_date } from '../../utils/readable/readable_date';
 import {useOrdersButtons} from '../../hooks/useOrdersButtons';
+import Price from '../UI/universal/Price';
+import Info from '../UI/universal/Info';
 
 const OrderBody = ({buttonAction,
                     status,
@@ -27,17 +29,15 @@ const OrderBody = ({buttonAction,
           <>
             <div className='mb-4 pt-4 d-flex justify-content-between'>
               {orderDetails?.created &&
-                <div>
-                  Заказ от {get_readable_date(new Date(orderDetails.created))}
-                </div>}
+                <Info description='Создан'
+                      message={get_readable_date(new Date(orderDetails.created))}/>}
               {orderDetails?.finished &&
-                <div>
-                  Завершён: {get_readable_date(new Date(orderDetails.finished))}
-                </div>}
+                <Info description='Завершён'
+                      message={get_readable_date(new Date(orderDetails.finished))}/>}
             </div>
             {orderDetails?.total_prize &&
               <div style={{marginBottom: 20}}>
-                Общая сумма: {orderDetails.total_prize} руб.
+                <Price price={orderDetails.total_prize}/>
               </div>}
             <ProductItemsList items={orderDetails.items}
                               place={orderDetails.status}/>

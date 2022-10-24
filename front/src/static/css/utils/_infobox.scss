@@ -1,0 +1,14 @@
+@mixin info-box($color, $background) {
+  color: #{$color};
+  display: flex;
+  min-height: 3em;
+  width: 100%;
+  justify-content:space-between;
+  align-items: center;
+  background: #{$background};
+  border: {
+    width: 0;
+    radius: 2em;
+  };
+  padding: 0 1em;
+}

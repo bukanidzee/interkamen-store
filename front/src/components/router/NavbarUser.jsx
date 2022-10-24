@@ -8,12 +8,11 @@ import OrdersLink from './ButtonOrLink/OrdersLink';
 import UserEntryLink from './ButtonOrLink/UserEntryLink';
 
 import {useLogout} from '../../hooks/useLogout';
-import {useIsStaffAndFullname} from '../../hooks/useAuthData';
 import {useSelector} from 'react-redux';
 
 const NavbarUser = ({navigate, isNavbarExpanded}) => {
-  const [is_staff, fullname] = useIsStaffAndFullname();
-  const {items} = useSelector(state => state.currentOrder)
+  const {is_staff, fullname} = useSelector(state => state.auth)
+  const items = useSelector(state => state.currentOrder.items)
 
   const logoutClick = useLogout()
   return(
@@ -34,7 +33,7 @@ const NavbarUser = ({navigate, isNavbarExpanded}) => {
             </NavDropdown>
             <OrdersLink OrderComponent={isNavbarExpanded ? Button : Nav.Link}
                         body={isNavbarExpanded ?
-                          <svg fill="currentColor" width={22} height={22}>
+                          <svg fill="dark" width={22} height={22}>
                             <BasketIcon />
                           </svg>
                           :

@@ -1,17 +1,14 @@
 import '../../static/css/components/ordercard.scss';
-import { useMemo} from 'react';
-import {useIsStaff} from '../../hooks/useAuthData';
+import {useSelector} from 'react-redux';
 import { get_readable_date } from '../../utils/readable/readable_date';
 import OrderCardStaff from './OrderCardStaff'
 import classnames from 'classnames'
 
 const OrderCard = ({order, number, setChoosedOrder, choosedOrder}) => {
 
-  const is_staff = useIsStaff()
+  const is_staff = useSelector(state => state.auth.is_staff)
 
-  const date = useMemo(() => {
-    return get_readable_date(new Date(order.created))
-  }, [])
+  const date = get_readable_date(new Date(order.created))
 
   const isActive = choosedOrder === order.id
 
@@ -26,7 +23,8 @@ const OrderCard = ({order, number, setChoosedOrder, choosedOrder}) => {
   return(
     <div onClick={onClickCallback}
          className={classnames('order-card',
-                               {'order-card-active':isActive})}>
+                               {'order-card-active':isActive},
+                               {'order-card-short':choosedOrder!==-1})}>
       {is_staff ?
         <OrderCardStaff number={number}
                         owner={order.owner}
@@ -34,7 +32,7 @@ const OrderCard = ({order, number, setChoosedOrder, choosedOrder}) => {
                         total_prize={order.total_prize}/>
       :
         <strong>
-          {number}. Заказ от {date} на сумму {order.total_prize} руб.
+          {number}. {date} на сумму {order.total_prize} руб.
         </strong>}
 
     </div>

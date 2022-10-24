@@ -1,21 +1,13 @@
 import LoaderSpinner from '../loading/LoaderSpinner';
 import ModalPage from './ModalPage';
 import {useSelector} from 'react-redux';
-import {useMemo} from 'react'
+import cn from 'classnames'
 
 const ModalLoader = () => {
   const {isLoading} = useSelector(state => state.loading)
-  const rootClasses = useMemo(() => {
-    const classArray = ['Modal']
-
-    if (isLoading) {
-      classArray.push('active')
-    }
-    return classArray
-  }, [isLoading])
 
   return(
-    <ModalPage classes={rootClasses.join(' ')}>
+    <ModalPage classes={cn('Modal', {'active': isLoading})}>
       <div style={{position: 'absolute',
                    top: '50%',
                    left: '50%'}}>

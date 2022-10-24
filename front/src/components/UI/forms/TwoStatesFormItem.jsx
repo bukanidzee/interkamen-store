@@ -1,41 +1,26 @@
 import FormItem from './FormItem';
-import Form from 'react-bootstrap/Form'
-// import Button from 'react-bootstrap/Button'
-import OneButtonOrGroup from '../buttons/OneButtonOrGroup';
-import {forwardRef, useMemo} from 'react'
+import {CloseButton} from 'react-bootstrap'
+import '../../../static/css/UI/closeButton.scss';
+import {forwardRef} from 'react'
 import {useUserAgent} from '../../../hooks/useUserAgent';
-import classnames from 'classnames';
+import cn from 'classnames';
 
 const TwoStatesFormItem = forwardRef((props, ref) => {
   const {isProductCardMedium} = useUserAgent()
 
-  const buttons = useMemo(() => {
-    return props.field.state === 'notActive' ?
-      [{name: 'Изменить',
-        type: 'button',
-        action: () => {
-          props.setField(props.name, {state:'active'})}}
-      ]
-    :
-      [{name: 'Подтвердить',
-        type: 'submit',
-        form: `form-${props.name}`},
-       {name: 'Отменить',
-        type: 'button',
-        action: () => {
-          props.setField(props.name, {value:props.field.initialValue,
-                                      state:'notActive'})}}
-      ]
-  }, [props.field])
+  const handleCancel = () => {
+    props.setField(props.name,
+                   {value:props.field.initialValue})
+  }
+
+  const notChanged = props.field.value===props.field.initialValue
 
   return(
-    <div className={classnames('my-3',
-                               {'w-50': isProductCardMedium},
-                               {'w-75': !isProductCardMedium},
-                               'mx-auto')}>
-
-      <Form onSubmit={props.onSubmit}
-            id={`form-${props.name}`}>
+    <div className={cn('my-3',
+                       {'w-50': isProductCardMedium},
+                       {'w-75': !isProductCardMedium},
+                       'mx-auto',
+                       'position-relative')}>
         <FormItem label={`${props.label}:`}
                   type={props.type}
                   placeholder={props.placeholder}
@@ -46,10 +31,11 @@ const TwoStatesFormItem = forwardRef((props, ref) => {
                   rows={props?.rows}
                   setField={props.setField}
                   error={props.error}
-                  disabled={props.field.state === 'notActive'}
-                  {...(ref ? {ref:ref} : {})}/>
-        <OneButtonOrGroup buttons={buttons} withMargin/>
-      </Form>
+                  {...(ref ? {ref:ref} : {})}
+                  notChanged={notChanged}/>
+        <CloseButton disabled={notChanged}
+                     onClick={handleCancel}
+                     className='closeButton'/>
 
     </div>
   )

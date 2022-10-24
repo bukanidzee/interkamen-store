@@ -6,7 +6,7 @@ import NavbarNav from './NavbarNav';
 import NavbarUser from './NavbarUser';
 import LogoImg from '../../static/images/logo_name.png';
 import {useUserAgent} from '../../hooks/useUserAgent';
-import classnames from 'classnames';
+import cn from 'classnames';
 
 const NavbarComponent = () => {
     const navigate = useNavigate();
@@ -16,7 +16,7 @@ const NavbarComponent = () => {
 
     return(
       <Navbar id='navbar'
-              className={classnames({'fixed-position': !isSidebarVisible})}
+              className={cn({'fixed-position': !isSidebarVisible})}
               collapseOnSelect
               expand="lg">
         <Container fluid>

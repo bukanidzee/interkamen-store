@@ -1,16 +1,63 @@
+@use '../utils/volume';
+
+%text-font {
+  font-family: monospace, sans-serif;
+  text: {
+    decoration: none;
+    transform: uppercase;
+    align: center;
+  }
+}
+
 #aside {
-  background: #f8f9fa;
+  @include volume.volume-box(4px);
+  background: var(--bs-main-background-color);
   position: relative;
-  top: calc(50vh - 100px);
-  padding: 10px;
   width: 250px;
   opacity: 0.9;
-  border-width: 0px;
-  border-radius: 3px;
-  border-color: #B6B6B6;
-  border-style: solid;
   z-index: 0;
+  padding: 10px 0;
+
+  & header {
+    @extend %text-font;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
 }
 .menu {
-  margin-left: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  overflow: hidden;
+  margin: 10px 0;
+  & a {
+    position: relative;
+    @extend %text-font;
+    width: 110%;
+    color: black;
+    padding: 5px 0;
+    transition: all 0.2s;
+
+    &:nth-child(n+2)::before {
+      content:'';
+      position: absolute;
+      top: 0;
+      left: 10%;
+      width: 80%;
+      border-top: 1px solid black;
+    }
+
+    &:hover {
+      // box-shadow: 0 0 2px 4px var(--bs-choose-color) inset;
+      // border-color: var(--bs-choose-color);
+      background: #e9ecef
+    }
+
+    &:active {
+      color: white;
+      background: var(--bs-choose-color);
+      box-shadow: 1px 1px 2px black inset;
+      border-color: var(--bs-choose-color);
+    }
+  }
 }

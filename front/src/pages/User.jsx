@@ -1,20 +1,21 @@
 import {useSelector} from 'react-redux';
-import {useCallback} from 'react'
 import {useAction} from '../hooks/useAction';
 import {useAPI} from '../hooks/useAPI';
 import {useDownloadInitial} from '../hooks/useDownloadInitial';
 import UserService from '../API/UserService';
-import {twoStatesFormSubmitAction} from '../utils/forms/formSubmitAction';
+import {regularFormSubmitAction} from '../utils/forms/formSubmitAction';
 import {handleFormsErrors} from '../utils/errors/handleErrors';
 import ChangeForm from '../components/UI/forms/ChangeForm';
 import {useTwoStatesForm} from '../hooks/useForm';
 import CentrifyForm from '../components/UI/forms/CentrifyForm';
+import {createFormData} from '../utils/forms/createFormData'
+import {readableNameAndInitials} from '../utils/readable/readableNameAndInitials'
 
 
 const User = () => {
   const userId = useSelector(state => state.auth.userId)
   const [form,
-         setForm,
+         setEntireForm,
          errors,
          setErrors,
          setField,
@@ -24,42 +25,34 @@ const User = () => {
                                            'last_name',
                                            'third_name',
                                            'email'])
-  const {changeFullname} = useAction()
+  const {setFullname} = useAction()
 
-  const getUser = useCallback(async () => {
+  const getUser = async () => {
     await UserService.getUser(
       userId,
-      (response) => {
-        let newForm = {...form}
-        for (let field in response) {
-          newForm[field].value = response[field]
-          newForm[field].initialValue = response[field]
-        }
-        setForm(newForm)
-      }
+      setEntireForm
     )
-  }, [userId, form])
+  }
 
   useDownloadInitial(getUser, userId, setIsLoading)
 
-  const fetchChanges = useCallback(async (field) => {
+  const fetchChanges = async () => {
+    const formdata = createFormData(form, {})
     await UserService.patchUser(
       userId,
-      {[field]: form[field].value},
-      () => {
-        setField(field, {state:'notActive', initialValue:form[field].value})
-        if (['first_name', 'last_name', 'third_name'].indexOf(field) !== -1){
-          changeFullname({'field':{[field]: form[field].value}})
-        }
+      formdata,
+      (data) => {
+        setEntireForm(data)
+        setFullname(readableNameAndInitials(form))
       })
-  }, [userId, form])
+  }
 
   const handleErrors = (err, field) => {
     handleFormsErrors(err, setErrors, field)
   }
 
   const patchUser = useAPI(
-    twoStatesFormSubmitAction(form, fetchChanges, setErrors, handleErrors)
+    regularFormSubmitAction(form, fetchChanges, setErrors, handleErrors)
   )
 
   return(

@@ -9,7 +9,10 @@ export const makeEmptyObject = (array) => {
 export const makeEmptyTwoStatesObject = (array) => {
   let object = {}
   for (let field of array) {
-    object[field] = {value: '', initialValue: '',state: 'notActive'}
+    object[field] = {value: '',
+                     initialValue: '',
+                     // state: 'notActive'
+                   }
   }
   return object
 }

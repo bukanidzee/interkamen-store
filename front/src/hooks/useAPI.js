@@ -1,17 +1,16 @@
-import {useCallback} from 'react'
 import {useAction} from '../hooks/useAction';
 import timeout from '../utils/timeout';
 import {handleFetchErrors} from '../utils/errors/handleErrors';
 
-export const useAPI = (callback, setIsLoading) => {
+export const useAPI = (fetchFunc, setIsLoading) => {
     const {appendError, setOrder, logout} = useAction()
-    const fetching = useCallback(async (...args) => {
+    const fetching = async (...args) => {
       if (setIsLoading) {
         setIsLoading(true)
       }
       try {
         await Promise.all([timeout(500),
-                           callback(...args)])
+                           fetchFunc(...args)])
       } catch (err) {
         handleFetchErrors(err, appendError, setOrder, logout)
       }
@@ -19,7 +18,7 @@ export const useAPI = (callback, setIsLoading) => {
       if (setIsLoading) {
         setIsLoading(false)
       }
-    }, [callback])
+    }
 
     return fetching
 }

@@ -1,15 +1,15 @@
-import {useRef, useEffect, useCallback} from 'react'
+import {useRef, useEffect} from 'react'
 
 export const useFirstLoadingCheck = (callback, checkConditionsArray) => {
   const isFirstLoading = useRef(true)
 
-  const firstLoadingCheckAndCallback = useCallback(async () => {
+  const firstLoadingCheckAndCallback = async () => {
       if (isFirstLoading.current) {
         isFirstLoading.current = false
         return
       }
       await callback()
-  }, [isFirstLoading, callback])
+  }
 
   useEffect(() => {
     firstLoadingCheckAndCallback()

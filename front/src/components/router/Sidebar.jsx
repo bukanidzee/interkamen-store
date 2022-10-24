@@ -7,17 +7,13 @@ const Sidebar = () =>
   <div id='aside'>
     {navLinks.map((bar) =>
       <div key={bar.title}>
-        {bar.title}
+        <header>{bar.title}</header>
         <nav className='menu'>
-          <ul>
-            {bar.links.map((link) =>
-              <li key={link.name}>
-                <Link to={link.to}>
-                  {link.name}
-                </Link>
-              </li>
-            )}
-          </ul>
+          {bar.links.map((link) =>
+            <Link to={link.to} key={link.name}>
+              {link.name}
+            </Link>
+          )}
         </nav>
       </div>
     )}

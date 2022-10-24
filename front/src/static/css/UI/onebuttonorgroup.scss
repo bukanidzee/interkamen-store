@@ -8,4 +8,8 @@
   width: inherit;
   justify-content: space-between;
   align-items: center;
+
+  & > button:nth-child(n+1){
+    margin-left: 10px
+  }
 }

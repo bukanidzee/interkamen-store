@@ -2,12 +2,12 @@ import Tabs from 'react-bootstrap/Tabs';
 import Tab from 'react-bootstrap/Tab';
 import OrderRepresentation from '../components/order/OrderRepresentation';
 import CurrentOrderDetail from '../components/order/CurrentOrderDetail';
-import { useIsStaff } from '../hooks/useAuthData';
+import { useSelector } from 'react-redux';
 import {useState} from 'react'
 import {useUserAgent} from '../hooks/useUserAgent';
 
 const Orders = () => {
-  const is_staff = useIsStaff()
+  const is_staff = useSelector(state => state.auth.is_staff)
   let [status, setStatus] = useState(is_staff ?
                                       'processing'
                                      :

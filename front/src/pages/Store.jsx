@@ -1,9 +1,9 @@
-import {useState, useEffect, useCallback} from 'react';
+import {useState, useEffect} from 'react';
 import ProductService from '../API/ProductService';
 import {useAPI} from '../hooks/useAPI';
 import {useFirstLoadingCheck} from '../hooks/useFirstLoadingCheck'
 import {getPageCount} from '../utils/pages';
-import {useIsStaff} from '../hooks/useAuthData';
+import {useSelector} from 'react-redux';
 import {useUserAgent} from '../hooks/useUserAgent';
 import Button from 'react-bootstrap/Button';
 import {useNavigate} from 'react-router-dom';
@@ -27,11 +27,11 @@ const Store = () => {
   const [status, setStatus] = useState('active')
   const {isProductCardMedium} = useUserAgent()
 
-  const is_staff = useIsStaff()
+  const is_staff = useSelector(state => state.auth.is_staff)
   const navigate = useNavigate()
   const getProducts = useAPI(async () => {
-    await ProductService.get_products({limit:10,
-                                       offset:10*(page-1)-choosed,
+    await ProductService.get_products({limit:12,
+                                       offset:12*(page-1)-choosed,
                                        query:productFilter.query,
                                        sort:productFilter.sort,
                                        status:status},
@@ -41,14 +41,14 @@ const Store = () => {
         } else {
           setProducts([...products, ...response.results]);
         }
-        setTotalPages(getPageCount(response.count + choosed, 10));
+        setTotalPages(getPageCount(response.count + choosed, 12));
         setTotalCount(response.count + choosed);
         setIsProductsReady(true)
       }
     )
   }, setIsProductsLoading);
 
-  const callback = useCallback(async () => {
+  const callback = async () => {
     setIsProductsReady(false)
     setChoosed(0)
     if (page === 1){
@@ -57,7 +57,7 @@ const Store = () => {
     else if (page>1) {
       setPage(1);
     }
-  }, [page, getProducts])
+  }
 
   useFirstLoadingCheck(callback, [productFilter, status])
 

@@ -1,5 +1,4 @@
 import {useNavigate} from 'react-router-dom';
-import {useCallback} from 'react'
 import {useAPI} from '../../hooks/useAPI';
 import UserService from '../../API/UserService';
 import {regularFormSubmitAction} from '../../utils/forms/formSubmitAction';
@@ -14,13 +13,13 @@ const PasswordChange = () => {
                                                        'new_password2'])
   const navigate = useNavigate()
 
-  const fetch = useCallback(async () => {
+  const fetch = async () => {
     await UserService.changePassword(
       form,
       () => {
         navigate('/password/change/success')
       })
-  }, [form])
+  }
 
   const handleErrors = (err) => {
     handleFormsErrors(err, setErrors, 'new_password2')

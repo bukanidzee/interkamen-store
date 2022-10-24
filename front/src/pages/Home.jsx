@@ -4,27 +4,27 @@ const Home = () =>
         <div className='main-text'>
           В состав ЗАО Интеркамень входят:
           <ol className='spisok'>
-            <li className='element'>Офис</li>
-            <li className='element'><a href='#'>Карьер</a></li>
-            <li className='element'><a href='#'>Цех</a></li>
+            <li>Офис</li>
+            <li><a href='#'>Карьер</a></li>
+            <li><a href='#'>Цех</a></li>
           </ol>
         </div>
         <div className='main-text'>
           В состав управления ЗАО Интеркамень входят:
           <ol className='spisok'>
-            <li className='element'>Директор:
+            <li>Директор:
               <ol className='spisok'>
-                <li className='element'>Соловей Дмитрий Анатольевич</li>
+                <li>Соловей Дмитрий Анатольевич</li>
               </ol>
             </li>
-            <li className='element'>Главный инженер:
+            <li>Главный инженер:
               <ol className='spisok'>
-                <li className='element'>Кострубин Константин Сергеевич</li>
+                <li>Кострубин Константин Сергеевич</li>
               </ol>
             </li>
-            <li className='element'>Главный бухгалтер:
+            <li>Главный бухгалтер:
               <ol className='spisok'>
-                <li className='element'>Кострубина Елена Алексеевна</li>
+                <li>Кострубина Елена Алексеевна</li>
               </ol>
             </li>
           </ol>

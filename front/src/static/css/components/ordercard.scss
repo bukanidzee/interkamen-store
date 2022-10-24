@@ -1,23 +1,39 @@
+@use '../utils/volume';
+@use '../utils/oneliner';
+
 .order-card {
+  @include volume.volume-box(1px);
   width: 100%;
   min-height: 70px;
-  border-radius: 10px;
-  border-style: solid;
-  border-width: 1px;
-  border-color: black;
-  align-items: center;
   margin-top: 15px;
   padding: 10px;
   cursor: pointer;
   font-weight: lighter;
+  transition: all 0.5s;
+  display: flex;
+  align-items: center;
+
+  & strong{
+    @include oneliner.one-liner();
+  }
+
+  &.order-card-short {
+    & strong {
+      -webkit-line-clamp: 2;
+    }
+  }
 
   &:hover:not(.order-card-active){
-    box-shadow: 1px 1px 2px 2px #000;
+    box-shadow: 1px 1px 2px 2px black inset;
   }
 
   &.order-card-active {
-    background: #0d6efd;
-    border-color: #0d6efd;
+    background: var(--bs-attention-color);
+    border-color: var(--bs-attention-color);
+
+    & strong{
+      color: white;
+    }
     /* cursor: default; */
   }
 }

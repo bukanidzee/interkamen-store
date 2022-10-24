@@ -1,6 +1,8 @@
 import Form from 'react-bootstrap/Form'
 import {forwardRef} from 'react'
 import FormPreviewImage from './FormPreviewImage'
+import cn from 'classnames'
+import '../../../static/css/UI/form-input.scss'
 
 const FormItem = forwardRef((props, ref) => {
 
@@ -12,7 +14,7 @@ const FormItem = forwardRef((props, ref) => {
                           initialValue={props.initialValue}
                           name={props.name}
                           ref={ref}/>}
-      <Form.Control className='mx-auto'
+      <Form.Control className={cn('mx-auto', {'not-changed': props.notChanged})}
                     type={props.type}
                     placeholder={props.placeholder}
                     {...(!ref ? {value:props.value} : {})}

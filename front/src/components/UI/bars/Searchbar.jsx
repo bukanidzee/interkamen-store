@@ -1,22 +1,21 @@
-import {useState, useCallback} from 'react';
+import {useState} from 'react';
 import Button from 'react-bootstrap/Button';
 import '../../../static/css/UI/searchbar.scss';
+import FancyInput from './FancyInput';
 
 const SearchBar = ({changeSearchQuery}) => {
   const [inputValue, setInputValue] = useState('');
 
-  const returnInputValue = useCallback((e) => {
+  const returnInputValue = (e) => {
     e.preventDefault()
     changeSearchQuery(inputValue);
-  }, [changeSearchQuery, inputValue])
+  }
 
   return(
     <form className='search-bar' onSubmit={returnInputValue}>
-      <input type='text'
-             className = 'search-input'
-             value={inputValue}
-             onChange={(event) => setInputValue(event.target.value)}
-             placeholder='Введите запрос'/>
+      <FancyInput inputValue={inputValue}
+                  setInputValue={setInputValue}
+                  placeholder='Введите запрос'/>
       <Button
         className = 'search-button'
         variant="outline-secondary"

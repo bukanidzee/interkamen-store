@@ -1,11 +1,13 @@
 import Badge from 'react-bootstrap/Badge';
+import '../../../static/css/UI/orderslink.scss'
 
 const OrdersLink = ({OrderComponent, body, is_staff, items, navigate}) =>
     <OrderComponent
-      variant='dark'
-      onClick={() => navigate('/orders')}>
+      variant='primary'
+      onClick={() => navigate('/orders')}
+      className='orders-link'>
       {body}
-      <Badge bg='primary' text='dark'>
+      <Badge bg='dark' text='white'>
         {!is_staff && items.length}
       </Badge>
     </OrderComponent>

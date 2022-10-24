@@ -1,16 +1,18 @@
 import {useAPI} from '../../hooks/useAPI';
 import {useFirstLoadingCheck} from '../../hooks/useFirstLoadingCheck';
+import {useDropChoosed} from '../../hooks/useDropChoosed';
 import OrderService from '../../API/OrdersService';
 import UserService from '../../API/UserService';
 import {getPageCount} from '../../utils/pages';
 import {ordersCallback} from '../../utils/callbacks/ordersCallback';
 import {orderSortOptions} from '../../utils/buttons/orderSortOptions';
 import '../../static/css/components/filter.scss'
+import '../../static/css/components/orderbox.scss';
 import classnames from 'classnames'
 import {useUserAgent} from '../../hooks/useUserAgent';
 
-import { useEffect, useState, useMemo, useCallback } from 'react';
-import {useIsStaff} from '../../hooks/useAuthData';
+import { useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -33,7 +35,7 @@ const OrderRepresentation = ({status}) => {
   const [choosedOrder,setChoosedOrder] = useState(-1);
   const [isOrdersLoading, setIsOrdersLoading] = useState(false);
   const [isChoosedLoading, setIsChoosedLoading] = useState(false);
-  const is_staff = useIsStaff()
+  const is_staff = useSelector(state => state.auth.is_staff)
   const getOrders = useAPI(async () => {
     await OrderService.get_orders(
       {limit:10,
@@ -53,28 +55,23 @@ const OrderRepresentation = ({status}) => {
       })
   }, setIsOrdersLoading);
 
-  const callback = useCallback(
-    ordersCallback(page,
-                   setPage,
-                   setIsOrdersReady,
-                   getOrders,
-                   setChoosedOrder,
-                   setChoosed)
-  , [getOrders])
+  const callback = ordersCallback(page,
+                                  setPage,
+                                  setIsOrdersReady,
+                                  getOrders,
+                                  setChoosedOrder,
+                                  setChoosed)
 
   useFirstLoadingCheck(callback, [filter, status]);
 
-  const {isTabsBig} = useUserAgent()
+  const {isTabsBig, isOrdersWide} = useUserAgent()
 
-
+  useDropChoosed(choosedOrder, setChoosedOrder, isOrdersWide)
   useEffect(() => {
     getOrders()
   }, [page])
 
-
-  const sortOptions = useMemo(() => {
-    return orderSortOptions(status)
-  }, [status])
+  const sortOptions = orderSortOptions(status)
 
   return(
     <Container fluid>
@@ -90,7 +87,7 @@ const OrderRepresentation = ({status}) => {
                                   fetchFunc={UserService.getUsers}/>}
       </div>
       <Row>
-        <Col>
+        <Col className='order-col-flex'>
           <LoadingOrMessage condition={isOrdersReady && orders.length}
                             isLoading={isOrdersLoading}
                             message='Извините, заказы данного статуса не найдены'>
@@ -106,16 +103,16 @@ const OrderRepresentation = ({status}) => {
           </LoadingOrMessage>
 
         </Col>
-        <OrderDetailBox orderId={choosedOrder}
-                        index={orders.indexOf(orders.find((el) => el.id===choosedOrder))}
-                        orders={orders}
-                        setOrders={setOrders}
-                        status={status}
-                        setChoosedOrder={setChoosedOrder}
-                        isChoosedLoading={isChoosedLoading}
-                        setIsChoosedLoading={setIsChoosedLoading}
-                        choosed={choosed}
-                        setChoosed={setChoosed}/>
+          <OrderDetailBox orderId={choosedOrder}
+                          index={orders.indexOf(orders.find((el) => el.id===choosedOrder))}
+                          orders={orders}
+                          setOrders={setOrders}
+                          status={status}
+                          setChoosedOrder={setChoosedOrder}
+                          isChoosedLoading={isChoosedLoading}
+                          setIsChoosedLoading={setIsChoosedLoading}
+                          choosed={choosed}
+                          setChoosed={setChoosed}/>
       </Row>
     </Container>
   )

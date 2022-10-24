@@ -17,9 +17,8 @@ const ProductDetail = () => {
   const [product, setProduct] = useState({});
   const [isLoading, setIsLoading] = useState(false)
   const navigate = useNavigate()
-  const selectItemOrUndefined = useMemo(getItemOfCurrentProduct, [])
-  const {productDetailWide} = useUserAgent()
 
+  const selectItemOrUndefined = useMemo(getItemOfCurrentProduct, [])
   const [index, item] = useSelector(
     state => selectItemOrUndefined(state, productId))
 
@@ -30,6 +29,8 @@ const ProductDetail = () => {
         setProduct(response)
       });
   }, setIsLoading)
+
+  const {productDetailWide} = useUserAgent()
 
   useEffect(() => {
     if (item) {

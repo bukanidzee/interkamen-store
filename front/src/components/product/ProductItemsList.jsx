@@ -3,11 +3,10 @@ import ProductItemInfo from './ProductItemInfo';
 import {TransitionGroup, CSSTransition} from "react-transition-group";
 import '../../static/css/components/productitemcard.scss';
 import {useDeleteChoosedArrayElement} from '../../hooks/useDeleteChoosedArrayElement';
-import {useUserAgent} from '../../hooks/useUserAgent';
-import classnames from 'classnames';
-// import Container from 'react-bootstrap/Container';
-// import Row from 'react-bootstrap/Row';
-// import Col from 'react-bootstrap/Col';
+// import {useUserAgent} from '../../hooks/useUserAgent';
+import {useProductGrid} from '../../hooks/useProductGrid';
+import cn from 'classnames';
+
 
 const ProductItemsList = ({items,
                            place,
@@ -19,33 +18,38 @@ const ProductItemsList = ({items,
                                                             setProducts,
                                                             choosed,
                                                             setChoosed)
-  const multipleItems = items.length > 1
-  const widePlace = place ==='store' || place==='current'
-  const {isProductCardMultiple} = useUserAgent()
-  return (
-    <TransitionGroup
-      className={classnames({'product-items-grid': isProductCardMultiple &&
-                                                   multipleItems &&
-                                                   widePlace})}>
 
-      {items.map((item, index) =>
-        <CSSTransition key={item.product?.id || item.id}
-                       timeout={500}
-                       classNames="product_item_card">
-          { widePlace ?
-            <ProductItem item={item}
-                         index={index}
-                         place={place}
-                         deleteChoosedProduct={deleteChoosedProduct}
-                         status={status}
-                         multipleItems={multipleItems}/>
-          :
-            <ProductItemInfo item={item}
-                             index={index}/>
-          }
-        </CSSTransition>
-      )}
-    </TransitionGroup>
+
+  const [productListRef, isGrid] = useProductGrid(items)
+
+  // const multipleItems = items.length > 1
+  const areItemsChangable = place ==='store' || place === 'current'
+  // const {isProductCardMultiple, isProductCardBig} = useUserAgent()
+
+  return (
+    <div ref={productListRef}>
+      <TransitionGroup
+        className={cn({'product-items-grid': isGrid})}>
+        {items.map((item, index) =>
+          <CSSTransition key={item.product?.id || item.id}
+                         timeout={500}
+                         classNames="product-item-card">
+            { areItemsChangable ?
+              <ProductItem item={item}
+                           index={index}
+                           place={place}
+                           deleteChoosedProduct={deleteChoosedProduct}
+                           status={status}
+                           isGrid={isGrid}/>
+            :
+              <ProductItemInfo item={item}
+                               index={index}
+                               isGrid={isGrid}/>
+            }
+          </CSSTransition>
+        )}
+      </TransitionGroup>
+    </div>
   )
 }
 

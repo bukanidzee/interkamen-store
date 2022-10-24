@@ -1,4 +1,9 @@
+@use '../utils/scrollbar' as scrollbar;
+
 .order-box {
+  @include scrollbar.initial-scrollbar();
+  padding-right: 8px;
+
   overflow-x: hidden;
   overflow-y: auto;
 
@@ -9,4 +14,16 @@
 
 .offcanvas-small *{
   font-size: 0.75rem;
+}
+
+.order-col-flex {
+  transition: flex 0.3s ease;
+
+  &.order-box-flex {
+    flex: 0 0 0px;
+
+    &.current-active {
+      flex: 0 0 58.33333333%;
+    }
+  }
 }

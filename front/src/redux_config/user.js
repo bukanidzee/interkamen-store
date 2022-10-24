@@ -26,7 +26,7 @@ const authSlice = createSlice({
       state.userId = null;
     },
     setFullname: (state, action) => {
-      const {fullname} = action.payload
+      const fullname = action.payload
       state.fullname = fullname;
     },
     changeFullname: (state, action) => {

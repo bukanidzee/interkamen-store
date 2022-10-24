@@ -1,0 +1,22 @@
+@mixin initial-scrollbar() {
+  scrollbar-color: var(--bs-attention-color) rgba(#fff, 0.5);
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+
+  &::-webkit-scrollbar {
+    width: 15px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: #e0e0e0;
+    border-radius: 100px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    box-shadow: inset 2px 2px 5px rgba(#fff, 0.5);
+    // background-color: var(--bs-attention-color);
+    background:  linear-gradient(0deg, gray  0%, var(--bs-attention-color) 100%);
+    border-radius: 100px;
+
+  }
+}
